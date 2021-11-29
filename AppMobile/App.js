@@ -13,6 +13,7 @@ import Home from './components/home.js';
 import About from './components/propos.js';
 import Principal from './components/principal.js';
 import CreateCompte from './components/createCompte.js'; 
+import Account from './components/account.js';
 
 class App extends React.Component {
   constructor(props){
@@ -26,7 +27,8 @@ class App extends React.Component {
         {/* <Connect/> */}
         {/* <About/> */}
         {/* <Principal/> */}
-        <CreateCompte/>
+        {/* <CreateCompte/> */}
+        <Account/>
       </View>
     );
   };
