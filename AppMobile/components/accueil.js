@@ -25,7 +25,6 @@ class Accueil extends React.Component {
     }
 
     _renderItem({item,index}){
-      console.log(item.image)
         return (
           <View>
             <Image source={item.image} style={style.plat} />
@@ -35,7 +34,7 @@ class Accueil extends React.Component {
 
     render() {
         return (
-          <SafeAreaView style={{flex: 1, backgroundColor:'orange'}}>
+          <SafeAreaView style={{flex: 1, backgroundColor:'#513a45'}}>
             <View style={{ flex: 1, margin: 60 , borderWidth: 2, marginBottom: 300 }}>
                 <View>
                   <Carousel

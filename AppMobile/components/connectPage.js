@@ -11,7 +11,7 @@ class Connect extends React.Component {
         return (  
             <SafeAreaView style={styles.container}>
                 <Image style={styles.image} 
-                    source={require('../images/food.jpg')} 
+                    source={require('../images/index.jpg')} 
                 />
                 <View style={{flex: 1}}>
                     <TextInput style={styles.Identifiant}
@@ -29,13 +29,15 @@ class Connect extends React.Component {
                 </View>
                 <Text style={styles.forgotPassword}>Mot de passe oublié ?</Text>
                 <View style={styles.buttonContainer}>
-                    <Button
+                    <Button 
                         title="Se connecter"
                         onPress={onPressHandler}
+                        color= "#5f4a4a"
                     />
                     <Button 
                         title="S'inscrire"
                         onPress={onPressHandler}
+                        color= "#5f4a4a"
                     />
                 </View>
             </SafeAreaView>
@@ -46,12 +48,12 @@ class Connect extends React.Component {
 const styles = StyleSheet.create({
     image: {
         top: 30,
-        height: 200,
+        height: 225,
         width: 220,
         left: 70,
     },
     container: {
-        backgroundColor: 'orange', 
+        backgroundColor: '#513a45', 
         height: '100%',
         width: '100%',
     },
@@ -65,7 +67,7 @@ const styles = StyleSheet.create({
         margin: 10,
         left: 45,
         borderWidth: 1,
-        top: '25%',
+        top: '22%',
         color: 'blue',
     },
     Mdp:{
@@ -78,7 +80,7 @@ const styles = StyleSheet.create({
         margin: 10,
         left: 45,
         borderWidth: 1,
-        top: '25%',
+        top: '17%',
         color: 'blue',        
     },
     forgotPassword: {
@@ -96,7 +98,7 @@ const styles = StyleSheet.create({
         width: 200,
         left: 82,
         justifyContent: 'space-around',
-        marginBottom: 15
+        marginBottom: 15,
     },
 })
     
