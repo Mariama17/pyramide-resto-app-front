@@ -9,8 +9,10 @@
 import React from 'react';
 import { View } from 'react-native';
 import Connect from './components/connectPage.js';
-import Accueil from './components/accueil.js';
+import Home from './components/home.js';
 import About from './components/propos.js';
+import Principal from './components/principal.js';
+import CreateCompte from './components/createCompte.js'; 
 
 class App extends React.Component {
   constructor(props){
@@ -20,9 +22,11 @@ class App extends React.Component {
   render() {
     return (
       <View style={{flex: 1}}>
-        <Connect/>
-        {/* <Accueil/> */}
+        {/* <Home/> */}
+        {/* <Connect/> */}
         {/* <About/> */}
+        {/* <Principal/> */}
+        <CreateCompte/>
       </View>
     );
   };

@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Image, View, Text, SafeAreaView, ImageBackground, Button, onPressHandler } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
 
-class Accueil extends React.Component {
+class Home extends React.Component {
     constructor(props){
         super(props);
         this.state = {
@@ -87,4 +87,4 @@ const style={
     },
   }    
 
-export default Accueil;
+export default Home;
