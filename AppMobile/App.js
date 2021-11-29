@@ -24,11 +24,11 @@ class App extends React.Component {
     return (
       <View style={{flex: 1}}>
         {/* <Home/> */}
-        {/* <Connect/> */}
+        <Connect/>
         {/* <About/> */}
         {/* <Principal/> */}
         {/* <CreateCompte/> */}
-        <Account/>
+        {/* <Account/> */}
       </View>
     );
   };

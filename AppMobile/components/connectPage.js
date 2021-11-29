@@ -34,6 +34,8 @@ class Connect extends React.Component {
                         onPress={onPressHandler}
                         color= "#5f4a4a"
                     />
+                </View>    
+                <View style={styles.buttonContainer2}>
                     <Button 
                         title="S'inscrire"
                         onPress={onPressHandler}
@@ -47,7 +49,7 @@ class Connect extends React.Component {
 
 const styles = StyleSheet.create({
     image: {
-        top: 30,
+        top: 10,
         height: 225,
         width: 220,
         left: 70,
@@ -67,7 +69,7 @@ const styles = StyleSheet.create({
         margin: 10,
         left: 45,
         borderWidth: 1,
-        top: '22%',
+        top: 10,
         color: 'blue',
     },
     Mdp:{
@@ -80,7 +82,7 @@ const styles = StyleSheet.create({
         margin: 10,
         left: 45,
         borderWidth: 1,
-        top: '17%',
+        top: '10%',
         color: 'blue',        
     },
     forgotPassword: {
@@ -89,16 +91,21 @@ const styles = StyleSheet.create({
         textDecorationLine: 'underline',
         fontSize: 15,
         left: 110,
-        top: -20,
+        top: 120,
     },
     buttonContainer: {
-        marginBottom: 10,
         fontWeight: 'bold',
-        height: 150,
+        height: 200,
         width: 200,
         left: 82,
-        justifyContent: 'space-around',
-        marginBottom: 15,
+        top: 140
+    },
+    buttonContainer2: {
+        fontWeight: 'bold',
+        height: 200,
+        width: 200,
+        left: 82,  
+        top: -10      
     },
 })
     
