@@ -8,6 +8,7 @@ class Connect extends React.Component {
     }
       
     render() {
+        // const [text, setText] = React.useState('');
         return (  
             <SafeAreaView style={styles.container}>
                 <Image style={styles.image} 
@@ -86,7 +87,7 @@ const styles = StyleSheet.create({
         color: 'blue',        
     },
     forgotPassword: {
-        color : 'black',
+        color : '#f7e0d2',
         fontWeight: 'bold',
         textDecorationLine: 'underline',
         fontSize: 15,

@@ -1,90 +1,106 @@
 import * as React from 'react';
-import { Image, View, Text, SafeAreaView, ImageBackground, Button, onPressHandler } from 'react-native';
-import Carousel from 'react-native-snap-carousel';
+import {
+  Image,
+  View,
+  SafeAreaView,
+  StyleSheet,
+  FlatList,
+} from 'react-native';
+import Plat from './Plat.js';
 
 class Home extends React.Component {
-    constructor(props){
-        super(props);
-        this.state = {
-          activeIndex:0,
-          carouselItems: [
-          {
-            image: require('../images/couscous/cous-removebg-preview.png'),
-          },
-          {
-            image: require('../images/couscous/couscous-marocain-removebg-preview.png'),
-          },
-          {
-            image: require('../images/couscous/couscous-removebg-preview.png'),
-          },
-          {
-            image: require('../images/couscous/unnamed-removebg-preview.png'),
-          },
-        ]
-      }
-    }
+  constructor(props) {
+    super(props);
+    
+  }
 
-    _renderItem({item,index}){
-        return (
-          <View>
-            <Image source={item.image} style={style.plat} />
-          </View>
-        )
-    }
+  _renderItem({item}) {
+    return (
+      <View>
+        <Image source={item.image} />
+      </View>
+    );
+  }
 
-    render() {
-        return (
-          <SafeAreaView style={{flex: 1, backgroundColor:'#513a45'}}>
-            <View style={{ flex: 1, margin: 60 , borderWidth: 2, marginBottom: 300 }}>
-                <View>
-                  <Carousel
-                    layout={"default"}
-                    ref={ref => this.carousel = ref}
-                    data={this.state.carouselItems}
-                    sliderWidth={300}
-                    itemWidth={320}
-                    height={200}
-                    renderItem={this._renderItem}
-                    onSnapToItem = { index => this.setState({activeIndex:index}) } />  
-                </View>
-                  <View>
-                    <Text style={style.descriptionPlat}>Couscous marocain</Text>
-                    <Text style={style.detailPlat}>collier d'agneau, semoule de blé dur, persil </Text>  
-                  </View> 
+  render() {
+    return (
+      <SafeAreaView style={{flex: 1, backgroundColor: '#513a45'}}>
+        <View>
+              <Image style={styles.image} 
+                source={require('../images/index.jpg')} 
+              />
             </View>
-          </SafeAreaView>
-        );
-    }
+        <FlatList
+          data={plats}
+          renderItem={({item}) => <Plat plat={item} />}
+          keyExtractor={item => item.id}
+        />
+      </SafeAreaView>
+    );
+  }
 }
 
-const style={
-    plat: {
-        left: 10,
-        width: 200,
-        height: 120,
-        top: 30, 
-    },
-    plat2: {
-        width: 300,
-        height: 280,
-        top: 20,
-    },
-    text: {
-        fontWeight: 'bold',
-        fontSize: 20,
-    },  
-    descriptionPlat: {
-        fontWeight: 'bold',
-        fontSize: 20,
-        top: -40,
-        left: 20,
-    },
-    detailPlat: {
-        fontWeight: 'bold',
-        fontSize: 12,
-        left: 5,
-        top: -40,
-    },
-  }    
+const plats = [
+  {
+    id: 1,
+    nom: 'Couscous marocain',
+    description: "Collier d'agneau, semoule de blé dur, persil",
+    images: [
+      {
+        image: require('../images/couscous/cous-removebg-preview.png'),
+      },
+      {
+        image: require('../images/couscous/couscous-marocain-removebg-preview.png'),
+      },
+      {
+        image: require('../images/couscous/couscous-removebg-preview.png'),
+      },
+      {
+        image: require('../images/couscous/unnamed-removebg-preview.png'),
+      },
+    ],
+  },
+  {
+    id: 2,
+    nom: 'Ravioli',
+    description: 'Farine, oeuf, sucre, levure, raviolis',
+    images: [
+      {
+        image: require('../images/blanc/index.jpg'),
+      },
+      {
+        image: require('../images/blanc/index2.jpg'),
+      },
+      {
+        image: require('../images/blanc/index3.jpg'),
+      },
+    ],
+  },
+  {
+    id: 3,
+    nom: 'Soushi',
+    description: 'Riz vinaigré, wasabi, natte de bambou',
+    images: [
+      {
+        image: require('../images/asi/photo.jpg'),
+      },
+      {
+        image: require('../images/asi/photo2.jpg'),
+      },
+      {
+        image: require('../images/asi/photo3.jpg'),
+      },
+    ],
+  },
+];
+
+const styles = StyleSheet.create({
+  image: {
+    top: 10,
+    height: 225,
+    width: 220,
+    left: 70,
+  }, 
+})
 
 export default Home;
