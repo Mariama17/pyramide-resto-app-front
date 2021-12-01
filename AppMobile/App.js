@@ -15,6 +15,7 @@ import Principal from './components/principal.js';
 import CreateCompte from './components/createCompte.js'; 
 import Account from './components/account.js';
 import Order from './components/order.js';
+import Drawer from './components/drawer.js';
 
 class App extends React.Component {
   constructor(props){
@@ -24,13 +25,14 @@ class App extends React.Component {
   render() {
     return (
       <View style={{flex: 1}}>
-        <Home/>
+        {/* <Home/> */}
         {/* <Connect/> */}
         {/* <About/> */}
         {/* <Principal/> a supprimer*/}
         {/* <CreateCompte/> */}
-        {/* <Account/> a supp*/}
+        {/* <Account/> */}
         {/* <Order/> */}
+        <Drawer/>
       </View>
     );
   };
