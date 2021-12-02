@@ -24,12 +24,12 @@ class Home extends React.Component {
 
   render() {
     return (
-      <SafeAreaView style={{flex: 1, backgroundColor: '#513a45'}}>
+      <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
         <View>
-              <Image style={styles.image} 
-                source={require('../images/index.jpg')} 
-              />
-            </View>
+          <Image style={styles.image} 
+            source={require('../images/index.jpg')} 
+          />
+        </View>
         <FlatList
           data={plats}
           renderItem={({item}) => <Plat plat={item} />}
@@ -97,9 +97,9 @@ const plats = [
 const styles = StyleSheet.create({
   image: {
     top: 10,
-    height: 225,
-    width: 220,
-    left: 70,
+    height: 100,
+    width: 100,
+    left: 170,
   }, 
 })
 
