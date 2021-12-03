@@ -11,7 +11,6 @@ import Plat from './Plat.js';
 class Home extends React.Component {
   constructor(props) {
     super(props);
-    
   }
 
   _renderItem({item}) {
