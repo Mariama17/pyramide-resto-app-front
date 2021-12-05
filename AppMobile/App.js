@@ -19,6 +19,8 @@ import CreateCompte from './components/createCompte.js';
 import Account from './components/account.js';
 import Order from './components/order.js';
 import Drawer from './components/drawer.js';
+import MenuPlat from './components/menuPlats.js'
+
 
 const HomeStack = createNativeStackNavigator();
 
@@ -32,10 +34,10 @@ function HomeStackScreen() {
 
 const SettingsStack = createNativeStackNavigator();
 
-function AboutStackScreen() {
+function CompteStackScreen() {
   return (
     <SettingsStack.Navigator>
-      <SettingsStack.Screen name="About" component={About} />
+      <SettingsStack.Screen name="Compte" component={CreateCompte} />
     </SettingsStack.Navigator>
   );
 }
@@ -52,7 +54,7 @@ class App extends React.Component {
     return (
       <NavigationContainer independent={true}>
         <View style={{flex: 1}}>
-          <Home/>
+          {/* <Home/> */}
           {/* <About/> */}
           {/* <Connect/>   */}
           {/* <Principal/> */}
@@ -60,9 +62,10 @@ class App extends React.Component {
           {/* <Account/> */}
           {/* <Order/> */}
           {/* <Drawer/> */}
+          <MenuPlat />
           {/* <Tab.Navigator>
             <Tab.Screen name="Home" component={HomeStackScreen} />
-            <Tab.Screen name="About" component={AboutStackScreen} />
+            <Tab.Screen name="Compte" component={CompteStackScreen} />
           </Tab.Navigator>   */}
         </View>
       </NavigationContainer> 
