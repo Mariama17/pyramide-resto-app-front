@@ -25,7 +25,7 @@ class Account extends React.Component {
                 <View style={styles.buttonContainer2}>
                     <Button 
                         title="Se Deconnecter"
-                        onPress={onPressHandler}
+                        onPress={() => {this.props.navigation.navigate('Tab navigator')}}
                         color= "#5f4a4a"
                     />
                 </View>    

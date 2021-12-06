@@ -55,7 +55,7 @@ class About extends React.Component {
                     onSnapToItem = { index => this.setState({activeIndex:index}) } />  
                 </View>
                 <View style={{ backgroundColor: 'white',Color:'black', margin: 38 ,width:300, right: 10, height:120, borderWidth: 1, top: 15, marginBottom: 300, justifyContent: 'center'}}>
-                    <Text>A PROPOS</Text>
+                    <Text>Le royal crée en </Text>
                 </View>
                 {/* <View style={styles.maps}>
                 </View> */}
@@ -74,8 +74,8 @@ const styles = StyleSheet.create({
     photo: {
         top: 20,
         height: 160,
-        width: 180,
-        left: 45,
+        width: 280,
+        left: 20,
     },
 })
 

@@ -23,15 +23,15 @@ class Home extends React.Component {
 
   render() {
     return (
-      <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
-        <View>
+      <SafeAreaView style={{flex: 1, backgroundColor: '#f7e0d2'}}>
+        {/* <View>
           <Image style={styles.image} 
             source={require('../images/index.jpg')} 
           />
-        </View>
+        </View> */}
         <FlatList
           data={plats}
-          renderItem={({item}) => <Plat plat={item} />}
+          renderItem={({item}) => <Plat plat={item} navigation={this.props.navigation}/>}
           keyExtractor={item => item.id}
         />
       </SafeAreaView>
@@ -94,12 +94,12 @@ const plats = [
 ];
 
 const styles = StyleSheet.create({
-  image: {
-    top: 10,
-    height: 100,
-    width: 100,
-    left: 170,
-  }, 
+  // image: {
+  //   top: 10,
+  //   height: 100,
+  //   width: 100,
+  //   left: 170,
+  // }, 
 })
 
 export default Home;

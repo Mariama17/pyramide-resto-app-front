@@ -32,14 +32,15 @@ class Connect extends React.Component {
                 <View style={styles.buttonContainer}>
                     <Button 
                         title="Se connecter"
-                        onPress={onPressHandler}
+                        onPress={() => {this.props.navigation.navigate('Drawer')}}
                         color= "#5f4a4a"
                     />
                 </View>    
                 <View style={styles.buttonContainer2}>
                     <Button 
                         title="S'inscrire"
-                        onPress={onPressHandler}
+                        // onPress={onPressHandler}
+                        onPress={() => this.props.navigation.navigate('Inscription')}
                         color= "#5f4a4a"
                     />
                 </View>

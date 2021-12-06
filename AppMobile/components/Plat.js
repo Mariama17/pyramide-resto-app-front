@@ -18,7 +18,7 @@ class Plat extends React.Component {
   render() {
     const plat = this.props.plat;
     return (
-      <View style={{flex: 1, borderWidth: 1, borderColor:"white", margin: 30, marginBottom: 10, width: 240, height: 220, left: 30}}>
+      <View style={{flex: 1, borderWidth: 1, borderColor:"#f7e0d2", margin: 30, marginBottom: 10, width: 240, height: 220, left: 30}}>
         <View elevation={3} style={styles.container}>
           <Carousel
             layout={'default'}
@@ -44,7 +44,8 @@ class Plat extends React.Component {
         <View style={{width:150, height: 150,bottom: 40, left: 40}}>
           <Button 
             title="Commander"
-            onPress={onPressHandler}
+            onPress={() => {this.props.navigation.navigate('Connexion')}}
+            // onPress={() => {this.props.navigation.toggleDrawer()}}
             color= '#513a45'
           />                    
         </View>
@@ -61,12 +62,12 @@ const styles = StyleSheet.create({
         top: 10, 
     },
     container:{
-      backgroundColor:'white',
+      backgroundColor:'#f7e0d2',
       shadowColor: "gray",
       shadowOpacity: 0.8,
       shadowRadius: 1,
       shadowOffset: {
-        height: 0.1,
+        height: 0.5,
         width: 0.1,
       }
      },

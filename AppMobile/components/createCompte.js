@@ -48,7 +48,7 @@ class CreateCompte extends React.Component {
                 <View style={styles.buttonContainer}>
                     <Button 
                         title="S'inscrire"
-                        onPress={onPressHandler}
+                        onPress={() => {this.props.navigation.navigate('Drawer')}}
                         color= "#5f4a4a"
                     />                    
                 </View>
