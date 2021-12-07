@@ -48,13 +48,13 @@ class Home extends React.Component {
         <View
           style={styles.centeredView}>
           <View style={styles.modalView}>
-            <View style={{backgroud: "#4c3737" ,width:140, right: 10, height:38,  top: 30, left: 35, flexDirection: 'row'}}>
+            <View style={{backgroud: "#4c3737", width:140, right: 10, height:38,  top: 30, left: 35, flexDirection: 'row'}}>
               <Button title="Sur place"
                 onPress={this.closeModal}
                 color= "#4c3737"
               />
             </View>
-            <View style={{backgroud: "#4c3737" ,width:140, left: 180, height:38,  top: -9, right: 20, flexDirection: 'row'}}>
+            <View style={{backgroud: "#4c3737", width:140, left: 180, height:38,  top: -9, right: 20, flexDirection: 'row'}}>
               <Button
                 title="emporter"
                 onPress={this.closeModal}

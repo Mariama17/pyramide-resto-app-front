@@ -53,10 +53,10 @@ class Plat extends React.Component {
           <Button
             title="Commander"
             onPress={() => {
-              this.props.showModal();
-              // this.props.navigation.navigate('Connexion');
+              // this.props.showModal();
+              this.props.navigation.navigate('Connexion');
             }}
-            // onPress={() => {this.props.navigation.toggleDrawer()}}
+            
             color="#513a45"
           />
         </View>

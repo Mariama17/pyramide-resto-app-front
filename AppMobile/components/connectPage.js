@@ -1,10 +1,29 @@
 import React from 'react';
-import {TextInput, View, SafeAreaView, StyleSheet, onChangeNumber, number, Image, Text, Button, onPressHandler } from 'react-native';
+import {TextInput, View, SafeAreaView, StyleSheet, onChangeNumber, number, Image, Text, Button, Alert } from 'react-native';
 // import { TextInput } from 'react-native-paper';
+import rest from '../API/rest.js';
 
 class Connect extends React.Component {
     constructor(props){
         super(props);
+        this.state = {
+            email: '',
+            password: '',
+        }
+    }
+    
+    login = () => {
+        rest.login({
+            "email": this.state.email,
+            "password": this.state.password,
+        })
+        .then(response => {
+                console.log('response : ', response);
+                this.props.navigation.navigate('Drawer')
+            })
+        .catch(() => {
+            Alert.alert("Authentifiants incorrects ")
+        })
     }
       
     render() {
@@ -16,14 +35,12 @@ class Connect extends React.Component {
                 />
                 <View style={{flex: 1}}>
                     <TextInput style={styles.Identifiant}
-                        onChangeText={onChangeNumber}
-                        value={number}
+                        onChangeText={text => this.setState({email: text})}
                         placeholder="Identifiant"
                         keyboardType="email-address"
                     />
                     <TextInput style={styles.Mdp}
-                        onChangeText={onChangeNumber}
-                        value={number}
+                        onChangeText={text => this.setState({password: text})}
                         placeholder="Mot de passe"
                         keyboardType="default"
                     />
@@ -32,7 +49,8 @@ class Connect extends React.Component {
                 <View style={styles.buttonContainer}>
                     <Button 
                         title="Se connecter"
-                        onPress={() => {this.props.navigation.navigate('Drawer')}}
+                        // onPress={() => {this.props.navigation.navigate('Drawer')}}
+                        onPress={this.login}
                         color= "#5f4a4a"
                     />
                 </View>    

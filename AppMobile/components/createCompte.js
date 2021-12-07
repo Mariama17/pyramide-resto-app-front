@@ -1,9 +1,35 @@
 import React from 'react';
-import {TextInput, View, SafeAreaView, StyleSheet, onChangeNumber, number, Image, Button, onPressHandler } from 'react-native';
+import {TextInput, View, SafeAreaView, StyleSheet, Alert, Image, Button, onPressHandler } from 'react-native';
+import rest from '../API/rest.js';
 
 class CreateCompte extends React.Component {
     constructor(props){
         super(props);
+        this.state = {
+            nom: '',
+            prenom: '',
+            email: '',
+            password: '',
+            confirmPassword: '',
+        }
+    }
+
+    addUser = () => {
+        rest.addUser({
+            "lastName": this.state.nom,
+            "firstName": this.state.prenom,
+            "email": this.state.email,
+            "password": this.state.password,
+            
+        })
+        .then(response => {
+            console.log('response : ', response);
+            this.props.navigation.navigate('Drawer');
+        })
+        .catch((err) => {
+            console.log('error : ', err);
+            Alert.alert("err")
+        })
     }
       
     render() {
@@ -14,32 +40,32 @@ class CreateCompte extends React.Component {
                 />
                 <View style={{flex: 1}}>
                     <TextInput style={styles.Identifiant}
-                        onChangeText={onChangeNumber}
-                        value={number}
+                        onChangeText={text => this.setState({nom: text})}
+                        
                         placeholder="Nom"
                         keyboardType="email-address"
                     />
                     <TextInput style={styles.Identifiant}
-                        onChangeText={onChangeNumber}
-                        value={number}
+                        onChangeText={text => this.setState({prenom: text})}
+                        
                         placeholder="Prenom"
                         keyboardType="email-address"
                     />
                     <TextInput style={styles.Identifiant}
-                        onChangeText={onChangeNumber}
-                        value={number}
+                        onChangeText={text => this.setState({email: text})}
+                        
                         placeholder="Adresse email"
                         keyboardType="email-address"
                     />
                     <TextInput style={styles.Identifiant}
-                        onChangeText={onChangeNumber}
-                        value={number}
+                        onChangeText={text => this.setState({password: text})}
+                        
                         placeholder="Mot de passe"
                         keyboardType="default"
                     />
                     <TextInput style={styles.Identifiant}
-                        onChangeText={onChangeNumber}
-                        value={number}
+                        onChangeText={text => this.setState({confirmPassword: text})}
+                        
                         placeholder="Confirmer le mot de passe"
                         keyboardType="default"
                     />
@@ -47,7 +73,8 @@ class CreateCompte extends React.Component {
                 <View style={styles.buttonContainer}>
                     <Button 
                         title="S'inscrire"
-                        onPress={() => {this.props.navigation.navigate('Drawer')}}
+                        // onPress={() => {this.props.navigation.navigate('Drawer')}}
+                        onPress={this.addUser}
                         color= "#5f4a4a"
                     />                    
                 </View>
