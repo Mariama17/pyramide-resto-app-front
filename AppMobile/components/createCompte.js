@@ -1,6 +1,5 @@
 import React from 'react';
 import {TextInput, View, SafeAreaView, StyleSheet, onChangeNumber, number, Image, Button, onPressHandler } from 'react-native';
-// import { TextInput } from 'react-native-paper';
 
 class CreateCompte extends React.Component {
     constructor(props){
@@ -83,14 +82,13 @@ const styles = StyleSheet.create({
         color: 'blue',
     },
     buttonContainer: {
-        marginBottom: 10,
         fontWeight: 'bold',
         height: 150,
         width: 200,
         left: 82,
         justifyContent: 'space-around',
         marginBottom: 15,
-        top: 25,
+        top: 68,
     },    
 })
     

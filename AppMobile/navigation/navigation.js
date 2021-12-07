@@ -1,6 +1,5 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import Home from '../components/home.js';
 import Connect from '../components/connectPage';
@@ -8,24 +7,23 @@ import CreateCompte from '../components/createCompte.js';
 import Plat from '../components/Plat.js';
 import Account from '../components/account.js';
 import About from '../components/about.js';
-import Principal from '../components/principal.js';
 import TabNavigator from '../components/TabNavigator.js';
 import { FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faBars} from '@fortawesome/free-solid-svg-icons'
-import {View} from 'react-native';
+import {Button, View} from 'react-native';
 
-function   OpenDrawerBtn({props}) {
-    return (
-        <View style={{flexDirection: 'row'}}>
-            <FontAwesomeIcon
-              icon={faBars}
-              size={30}
-              color={'#f7e0d2'}
-              onPress={() => props.navigation.toggleDrawer()}
-            />
-        </View>
-    );
-  }
+// function  OpenDrawerBtn({props}) {
+//     return (
+//         <View style={{flexDirection: 'row'}}>
+//             <FontAwesomeIcon
+//               icon={faBars}
+//               size={30}
+//               color={'#f7e0d2'}
+//               onPress={() => props.navigation.toggleDrawer()}
+//             />
+//         </View>
+//     );
+//   }
 
 class Navigator extends React.Component {
   constructor(props) {
@@ -37,13 +35,13 @@ class Navigator extends React.Component {
     return (
       <Drawer.Navigator>
         <Drawer.Screen
-          name="Home"
+          name="Accueil"
           component={TabNavigator}
           options={{headerShown: false}}
         />
-        <Drawer.Screen name="Account" component={Account} />
-        <Drawer.Screen name="About" component={About} />
-        <Drawer.Screen name="Principal" component={Principal} />
+        <Drawer.Screen name="Mon Compte" component={Account} />
+        <Drawer.Screen name="A propos" component={About} />
+        <Drawer.Screen name="Se déconnecter" component={Home} />
       </Drawer.Navigator>
     );
   }
@@ -55,7 +53,7 @@ class Navigator extends React.Component {
         <Stack.Screen
           name="Drawer"
           component={this.DrawerNavigator}
-        //   options={{ headerTitle: (props) => <OpenDrawerBtn {...props} /> }}
+        //  options={{ headerTitle: (props) => <OpenDrawerBtn {...props} /> }}
           options={{headerShown: false}}
         />
         <Stack.Screen name="Connexion" component={Connect} />

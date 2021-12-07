@@ -18,7 +18,17 @@ class Plat extends React.Component {
   render() {
     const plat = this.props.plat;
     return (
-      <View style={{flex: 1, borderWidth: 1, borderColor:"#f7e0d2", margin: 30, marginBottom: 10, width: 240, height: 220, left: 30}}>
+      <View
+        style={{
+          flex: 1,
+          borderWidth: 1,
+          borderColor: '#f7e0d2',
+          margin: 30,
+          marginBottom: 10,
+          width: 240,
+          height: 220,
+          left: 30,
+        }}>
         <View elevation={3} style={styles.container}>
           <Carousel
             layout={'default'}
@@ -31,9 +41,7 @@ class Plat extends React.Component {
             onSnapToItem={index => this.setState({activeIndex: index})}
           />
           <Text style={styles.descriptionPlat}>{plat.nom}</Text>
-          <Text style={styles.detailPlat}>
-            {plat.description}
-          </Text>
+          <Text style={styles.detailPlat}>{plat.description}</Text>
         </View>
         <View>
           {/* <Text style={styles.descriptionPlat}>{plat.nom}</Text>
@@ -41,13 +49,16 @@ class Plat extends React.Component {
             {plat.description}
           </Text> */}
         </View>
-        <View style={{width:150, height: 150,bottom: 40, left: 40}}>
-          <Button 
+        <View style={{width: 150, height: 150, bottom: 40, left: 40}}>
+          <Button
             title="Commander"
-            onPress={() => {this.props.navigation.navigate('Connexion')}}
+            onPress={() => {
+              this.props.showModal();
+              // this.props.navigation.navigate('Connexion');
+            }}
             // onPress={() => {this.props.navigation.toggleDrawer()}}
-            color= '#513a45'
-          />                    
+            color="#513a45"
+          />
         </View>
       </View>
     );

@@ -14,9 +14,9 @@ class TabNavigator extends React.PureComponent {
       <Tab.Navigator>
         <Tab.Screen name="Menu du jour" component={Home} />
         <Tab.Screen
-          name="Menu de la semaine "
+          name="Menu de la semaine"
           component={Home}
-          //   options={{headerShown: false}} // éviter la duplication
+          // options={{headerShown: false}} // éviter la duplication
         />
       </Tab.Navigator>
     );
