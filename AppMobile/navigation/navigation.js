@@ -12,19 +12,6 @@ import { FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faBars} from '@fortawesome/free-solid-svg-icons'
 import {Button, View} from 'react-native';
 
-// function  OpenDrawerBtn({props}) {
-//     return (
-//         <View style={{flexDirection: 'row'}}>
-//             <FontAwesomeIcon
-//               icon={faBars}
-//               size={30}
-//               color={'#f7e0d2'}
-//               onPress={() => props.navigation.toggleDrawer()}
-//             />
-//         </View>
-//     );
-//   }
-
 class Navigator extends React.Component {
   constructor(props) {
     super(props);

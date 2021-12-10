@@ -18,8 +18,8 @@ class Connect extends React.Component {
             "password": this.state.password,
         })
         .then(response => {
-                console.log('response : ', response);
-                this.props.navigation.navigate('Drawer')
+                console.log('response : ', response.token);
+                this.props.navigation.navigate('Drawer', {token: response.token})
             })
         .catch(() => {
             Alert.alert("Authentifiants incorrects ")

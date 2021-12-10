@@ -1,16 +1,19 @@
 import React from 'react';
-import { Image, View, Text, StyleSheet, Button, onPressHandler, StatusBar} from 'react-native';
+import { Image, View, Text, StyleSheet, Button, text} from 'react-native';
 import Carousel from 'react-native-snap-carousel';
+import SeeMore from 'react-native-see-more-inline';
 
 class Plat extends React.Component {
   constructor(props) {
     super(props);
   }
 
+  getFoodOfCurrentDay = () => {};
+
   _renderItem({item}) {
     return (
       <View>
-        <Image source={item.image} style={styles.plat} />
+        <Image source={{uri: item.imageUrl}} style={styles.plat} />
       </View>
     );
   }
@@ -20,14 +23,12 @@ class Plat extends React.Component {
     return (
       <View
         style={{
-          flex: 1,
           borderWidth: 1,
           borderColor: '#f7e0d2',
-          margin: 30,
-          marginBottom: 10,
+          // marginTop: 30,
           width: 240,
-          height: 220,
-          left: 30,
+          height: 'auto',
+          justifyContent: 'space-between',
         }}>
         <View elevation={3} style={styles.container}>
           <Carousel
@@ -40,8 +41,14 @@ class Plat extends React.Component {
             renderItem={this._renderItem}
             onSnapToItem={index => this.setState({activeIndex: index})}
           />
-          <Text style={styles.descriptionPlat}>{plat.nom}</Text>
-          <Text style={styles.detailPlat}>{plat.description}</Text>
+          <Text style={styles.descriptionPlat}>{plat.name}</Text>
+          <View style={styles.detailPlat}>
+            {plat != null &&
+            <SeeMore style={styles.detailPlat} numberOfLines={2}> 
+              {plat.ingredients}
+            </SeeMore> 
+            }
+          </View>
         </View>
         <View>
           {/* <Text style={styles.descriptionPlat}>{plat.nom}</Text>
@@ -49,14 +56,13 @@ class Plat extends React.Component {
             {plat.description}
           </Text> */}
         </View>
-        <View style={{width: 150, height: 150, bottom: 40, left: 40}}>
+        <View style={{width: 150, bottom: 40, left: 40}}>
           <Button
             title="Commander"
             onPress={() => {
-              // this.props.showModal();
-              this.props.navigation.navigate('Connexion');
+              this.props.showModal();
+              // this.props.navigation.navigate('Connexion');
             }}
-            
             color="#513a45"
           />
         </View>

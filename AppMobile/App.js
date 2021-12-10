@@ -9,14 +9,15 @@
 import React from 'react';
 import {View} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
+import Navigator from './navigation/navigation.js';
+import {createStackNavigator} from '@react-navigation/stack';
 import Connect from './components/connectPage.js';
 import Home from './components/home.js';
 import About from './components/about.js';
 import CreateCompte from './components/createCompte.js';
 import Account from './components/account.js';
 import Order from './components/order.js';
-import Navigator from './navigation/navigation.js';
-import {createStackNavigator} from '@react-navigation/stack';
+import MenuWeek from './components/menuWeek.js';
 
 class App extends React.Component {
   constructor(props) {
@@ -28,7 +29,7 @@ class App extends React.Component {
     return (
       <NavigationContainer>
         <View style={{flex: 1}}>
-          <Navigator />
+          <Navigator /> 
           {/* <Order/> */}
         </View>
       </NavigationContainer>

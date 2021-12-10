@@ -1,4 +1,4 @@
-const apiURL = 'http://192.168.1.166:1998'
+const apiURL = 'http://yvandev.fr:1998'
 
 const rest = {
     // login (data) {
@@ -36,9 +36,47 @@ login(data) {
             }).then((response) => {resolve(response);})
             .catch((err) => reject(err));
         }) 
+    },    
 
-    }
+    getFoodOfCurrentDay(){
+        let myHeaders = new Headers();
+        myHeaders.append('Content-Type', 'application/json');
+        // myHeaders.append('Authorization', token);
+        return new Promise((resolve, reject) => {
+            fetch(apiURL + '/food/day', {
+                method: 'GET',
+                headers: myHeaders,
+            }).then((response) => {resolve(response.json());})
+            .catch((err) => reject(err));
+        })   
+    },
+
+    getFoodOfCurrentWeek(){
+        let myHeaders = new Headers();
+        myHeaders.append('Content-Type', 'application/json');
+        // myHeaders.append('Authorization', token);
+        return new Promise((resolve, reject) => {
+            fetch(apiURL + '/food/week', {
+                method: 'GET',
+                headers: myHeaders,
+            }).then((response) => {resolve(response.json());})
+            .catch((err) => reject(err));
+        })
+    },
+
+    getImagesFood(idFood){
+        let myHeaders = new Headers();
+        myHeaders.append('Content-Type', 'application/json');
+        // myHeaders.append('Authorization', token);
+        return new Promise((resolve, reject) => {
+            fetch(apiURL + '/imageFood/id/' + idFood, {
+                method: 'GET',
+                headers: myHeaders,
+            }).then((response) => {resolve(response.json());})
+            .catch((err) => reject(err));
+        })   
+    },
+
 }
-
 
 export default rest;

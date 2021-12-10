@@ -6,28 +6,27 @@ import {
   StyleSheet,
   FlatList,
   Button,
-  RefreshControl,
 } from 'react-native';
 import Modal from 'react-native-modal';
 import Plat from './Plat.js';
 import rest from '../API/rest.js';
 
-class Home extends React.Component {
+class MenuWeek extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       showModal: false,
       foodsOfDay: null,
       token: null,
-      refreshing: true,
     };
   }
 
-  getFoodOfCurrentDay = () => {
+  componentDidMount() {
+    // console.log('this.props.route.params: ', this.props.route.params);
     if (this.props.route.params != undefined)
       this.setState({token: this.props.route.params.token});
     rest
-      .getFoodOfCurrentDay()
+      .getFoodOfCurrentWeek()
       .then(foodsOfDay => {
         foodsOfDay.forEach((food, index) => {
           rest.getImagesFood(food.id).then(images => {
@@ -35,17 +34,9 @@ class Home extends React.Component {
             foodsOfDay[index] = food;
           });
         });
-        this.setState({foodsOfDay}, () => {
-          this.setState({refreshing: false});
-        });
+        this.setState({foodsOfDay});
       })
-      .catch(() => {
-        this.setState({refreshing: false});
-      });
-  };
-
-  componentDidMount() {
-    this.getFoodOfCurrentDay();
+      .catch(() => {});
   }
 
   _renderItem({item}) {
@@ -110,17 +101,6 @@ class Home extends React.Component {
               />
             </View>
           </View>
-
-          {/* <View
-            style={{
-              backgroud: '#4c3737',
-              width: 140,
-              left: 180,
-              height: 38,
-              top: 116,
-              right: 25,
-              flexDirection: 'row',
-            }}> */}
         </View>
       </Modal>
     );
@@ -131,23 +111,17 @@ class Home extends React.Component {
       <SafeAreaView
         style={{flex: 1, alignItems: 'center', backgroundColor: '#f7e0d2'}}>
         {this.handleModal()}
-          <FlatList
-            data={this.state.foodsOfDay}
-            renderItem={({item}) => (
-              <Plat
-                plat={item}
-                showModal={this.showModal}
-                navigation={this.props.navigation}
-              />
-            )}
-            refreshControl={
-              <RefreshControl
-                refreshing={this.state.refreshing}
-                onRefresh={this.getFoodOfCurrentDay}
-              />
-            }
-            keyExtractor={item => item.id}
-          />
+        <FlatList
+          data={this.state.foodsOfDay}
+          renderItem={({item}) => (
+            <Plat
+              plat={item}
+              showModal={this.showModal}
+              navigation={this.props.navigation}
+            />
+          )}
+          keyExtractor={item => item.id}
+        />
       </SafeAreaView>
     );
   }
@@ -177,4 +151,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Home;
+export default MenuWeek;
