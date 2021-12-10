@@ -6,6 +6,7 @@ import {
   StyleSheet,
   FlatList,
   Button,
+  RefreshControl
 } from 'react-native';
 import Modal from 'react-native-modal';
 import Plat from './Plat.js';
@@ -18,6 +19,7 @@ class MenuWeek extends React.Component {
       showModal: false,
       foodsOfDay: null,
       token: null,
+    //   refreshing: true,
     };
   }
 
@@ -111,16 +113,22 @@ class MenuWeek extends React.Component {
       <SafeAreaView
         style={{flex: 1, alignItems: 'center', backgroundColor: '#f7e0d2'}}>
         {this.handleModal()}
-        <FlatList
-          data={this.state.foodsOfDay}
-          renderItem={({item}) => (
-            <Plat
-              plat={item}
-              showModal={this.showModal}
-              navigation={this.props.navigation}
-            />
-          )}
-          keyExtractor={item => item.id}
+            <FlatList
+            data={this.state.foodsOfDay}
+            renderItem={({item}) => (
+                <Plat
+                    plat={item}
+                    showModal={this.showModal}
+                    navigation={this.props.navigation}
+                />
+            )}
+            // refreshControl={
+            //     <RefreshControl
+            //       refreshing={this.state.refreshing}
+            //       onRefresh={this.getFoodOfCurrentDay}
+            //     />
+            // }
+            keyExtractor={item => item.id}
         />
       </SafeAreaView>
     );

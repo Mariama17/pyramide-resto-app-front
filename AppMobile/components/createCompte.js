@@ -1,5 +1,5 @@
 import React from 'react';
-import {TextInput, View, SafeAreaView, StyleSheet, Alert, Image, Button, onPressHandler } from 'react-native';
+import {TextInput, View, SafeAreaView, StyleSheet, Alert, Image, Button} from 'react-native';
 import rest from '../API/rest.js';
 
 class CreateCompte extends React.Component {

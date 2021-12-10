@@ -25,7 +25,6 @@ class Plat extends React.Component {
         style={{
           borderWidth: 1,
           borderColor: '#f7e0d2',
-          // marginTop: 30,
           width: 240,
           height: 'auto',
           justifyContent: 'space-between',
@@ -60,7 +59,7 @@ class Plat extends React.Component {
           <Button
             title="Commander"
             onPress={() => {
-              this.props.showModal();
+              this.props.showModal(plat);
               // this.props.navigation.navigate('Connexion');
             }}
             color="#513a45"
@@ -93,6 +92,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         textAlign: 'center',
         fontSize: 20,
+        marginBottom: 5,
         top: -60,
     },
     detailPlat: {
@@ -101,6 +101,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontSize: 12,
         top: -60,
+        marginLeft: 10
     },
     text: {
         fontWeight: 'bold',

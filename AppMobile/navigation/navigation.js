@@ -11,6 +11,7 @@ import TabNavigator from '../components/TabNavigator.js';
 import { FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faBars} from '@fortawesome/free-solid-svg-icons'
 import {Button, View} from 'react-native';
+import Drawer from '../components/DrawerNavigator.js';
 
 class Navigator extends React.Component {
   constructor(props) {
@@ -23,7 +24,7 @@ class Navigator extends React.Component {
       <Drawer.Navigator>
         <Drawer.Screen
           name="Accueil"
-          component={TabNavigator}
+          component={(props) => <TabNavigator {...props} propName={"val"} />}
           options={{headerShown: false}}
         />
         <Drawer.Screen name="Mon Compte" component={Account} />
@@ -39,7 +40,7 @@ class Navigator extends React.Component {
       <Stack.Navigator>
         <Stack.Screen
           name="Drawer"
-          component={this.DrawerNavigator}
+          component={Drawer}
         //  options={{ headerTitle: (props) => <OpenDrawerBtn {...props} /> }}
           options={{headerShown: false}}
         />

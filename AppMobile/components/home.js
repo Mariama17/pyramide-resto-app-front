@@ -7,6 +7,7 @@ import {
   FlatList,
   Button,
   RefreshControl,
+  Text,
 } from 'react-native';
 import Modal from 'react-native-modal';
 import Plat from './Plat.js';
@@ -20,6 +21,8 @@ class Home extends React.Component {
       foodsOfDay: null,
       token: null,
       refreshing: true,
+      platCommand: undefined,
+      user: null
     };
   }
 
@@ -45,6 +48,11 @@ class Home extends React.Component {
   };
 
   componentDidMount() {
+    const params = this.props.route.params;
+    params != undefined &&
+    this.setState({token: this.props.route.params.token}, () => {
+      rest.getUser(params.token).then(user => {this.setState({user})})
+    })
     this.getFoodOfCurrentDay();
   }
 
@@ -56,8 +64,9 @@ class Home extends React.Component {
     );
   }
 
-  showModal = () => {
+  showModal = platCommand => {
     this.setState({showModal: true});
+    if (platCommand != undefined) this.setState({platCommand});
   };
 
   closeModal = () => {
@@ -65,6 +74,7 @@ class Home extends React.Component {
   };
 
   handleModal = () => {
+    const platCommand = this.state.platCommand;
     return (
       <Modal
         visible={this.state.showModal}
@@ -77,50 +87,62 @@ class Home extends React.Component {
         }}>
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
-            <View
-              style={{
-                backgroud: '#4c3737',
-                width: 140,
-                right: 10,
-                height: 38,
-                top: 30,
-                left: 35,
-                flexDirection: 'row',
-              }}>
-              <Button
-                title="Sur place"
-                onPress={this.closeModal}
-                color="#4c3737"
-              />
-            </View>
-            <View
-              style={{
-                backgroud: '#4c3737',
-                width: 140,
-                left: 180,
-                height: 38,
-                top: -9,
-                right: 20,
-                flexDirection: 'row',
-              }}>
-              <Button
-                title="emporter"
-                onPress={this.closeModal}
-                color="#4c3737"
-              />
+            {platCommand != undefined && (
+              <View style={styles.Recap}>
+                <Text style={{fontSize: 20, fontWeight: 'bold', textAlign: 'center'}}>
+                  Summary of your order
+                </Text>
+                <Text style={{margin: 10, color: 'black'}}>
+                  <Text style={{fontWeight: 'bold'}}>Food : </Text>{platCommand.name}
+                </Text>
+                <Text style={{margin: 10, color: 'black'}}>
+                <Text style={{fontWeight: 'bold'}}>Date : </Text>{platCommand.day} {platCommand.date}
+                </Text>
+                <Text style={{margin: 10, color: 'black'}}>
+                <Text style={{fontWeight: 'bold'}}>Price : </Text> 50 €
+                </Text>
+                {this.state.user != null &&
+                  <Text style={{margin: 10, color: 'black'}}>
+                    <Text style={{fontWeight: 'bold'}}>Name : </Text> {this.state.user.firstName} {this.state.user.LastName}
+                  </Text>
+                }
+              </View>
+            )}
+            <View style={{justifyContent: 'flex-end'}}>
+              <View
+                style={{
+                  background: '#4c3737',
+                  width: 140,
+                  right: 10,
+                  height: 38,
+                  top: 30,
+                  left: 35,
+                  flexDirection: 'row',
+                }}>
+                <Button
+                  title="Sur place"
+                  onPress={this.closeModal}
+                  color="#4c3737"
+                />
+              </View>
+              <View
+                style={{
+                  backgroud: '#4c3737',
+                  width: 140,
+                  left: 180,
+                  height: 38,
+                  top: -9,
+                  right: 20,
+                  flexDirection: 'row',
+                }}>
+                <Button
+                  title="emporter"
+                  onPress={this.closeModal}
+                  color="#4c3737"
+                />
+              </View>
             </View>
           </View>
-
-          {/* <View
-            style={{
-              backgroud: '#4c3737',
-              width: 140,
-              left: 180,
-              height: 38,
-              top: 116,
-              right: 25,
-              flexDirection: 'row',
-            }}> */}
         </View>
       </Modal>
     );
@@ -131,38 +153,32 @@ class Home extends React.Component {
       <SafeAreaView
         style={{flex: 1, alignItems: 'center', backgroundColor: '#f7e0d2'}}>
         {this.handleModal()}
-          <FlatList
-            data={this.state.foodsOfDay}
-            renderItem={({item}) => (
-              <Plat
-                plat={item}
-                showModal={this.showModal}
-                navigation={this.props.navigation}
-              />
-            )}
-            refreshControl={
-              <RefreshControl
-                refreshing={this.state.refreshing}
-                onRefresh={this.getFoodOfCurrentDay}
-              />
-            }
-            keyExtractor={item => item.id}
-          />
+        <FlatList
+          data={this.state.foodsOfDay}
+          renderItem={({item}) => (
+            <Plat
+              plat={item}
+              showModal={this.showModal}
+              navigation={this.props.navigation}
+            />
+          )}
+          refreshControl={
+            <RefreshControl
+              refreshing={this.state.refreshing}
+              onRefresh={this.getFoodOfCurrentDay}
+            />
+          }
+          keyExtractor={item => item.id}
+        />
       </SafeAreaView>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  // image: {
-  //   top: 10,
-  //   height: 100,
-  //   width: 100,
-  //   left: 170,
-  // },
   centeredView: {
     flex: 1,
-    justifyContent: 'flex-end',
+    // justifyContent: 'flex-end',
     alignItems: 'center',
     marginBottom: '15%',
     flexDirection: 'row',
@@ -173,7 +189,11 @@ const styles = StyleSheet.create({
     height: '54%',
     width: '97%',
     backgroundColor: 'white',
-    justifyContent: 'flex-end',
+    // justifyContent: 'flex-end',
+  },
+  Recap: {
+    justifyContent: 'space-around',
+    top: 2
   },
 });
 

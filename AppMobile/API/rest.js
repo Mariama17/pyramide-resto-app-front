@@ -77,6 +77,18 @@ login(data) {
         })   
     },
 
+    getUser(token){
+        let myHeaders = new Headers();
+        myHeaders.append('Content-Type', 'application/json');
+        // myHeaders.append('Authorization', token);
+        return new Promise((resolve, reject) => {
+            fetch(apiURL + '/user/token/' + token, {
+                method: 'GET',
+                headers: myHeaders,
+            }).then((response) => {resolve(response.json());})
+            .catch((err) => reject(err));
+        })   
+    },
 }
 
 export default rest;

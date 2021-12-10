@@ -1,5 +1,5 @@
 import React from 'react';
-import {TextInput, View, SafeAreaView, StyleSheet, onChangeNumber, number, Image, Text, Button, Alert } from 'react-native';
+import {TextInput, View, SafeAreaView, StyleSheet, Image, Text, Button, Alert } from 'react-native';
 // import { TextInput } from 'react-native-paper';
 import rest from '../API/rest.js';
 
@@ -19,7 +19,7 @@ class Connect extends React.Component {
         })
         .then(response => {
                 console.log('response : ', response.token);
-                this.props.navigation.navigate('Drawer', {token: response.token})
+                this.props.navigation.navigate('Menu du jour', {token: response.token})
             })
         .catch(() => {
             Alert.alert("Authentifiants incorrects ")
