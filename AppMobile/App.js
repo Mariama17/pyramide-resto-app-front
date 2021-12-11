@@ -11,7 +11,7 @@ import {View} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import Navigator from './navigation/navigation.js';
 import {createStackNavigator} from '@react-navigation/stack';
-
+import SplashScreen from './components/splashScreen';
 
 class App extends React.Component {
   constructor(props) {
@@ -23,7 +23,8 @@ class App extends React.Component {
     return (
       <NavigationContainer>
         <View style={{flex: 1}}>
-          <Navigator /> 
+          {/* <Navigator />  */}
+          <SplashScreen/>
         </View>
       </NavigationContainer>
     );
