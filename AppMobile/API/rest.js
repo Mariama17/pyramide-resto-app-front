@@ -22,9 +22,9 @@ login(data) {
                 body: JSON.stringify(data)
             }).then((response) => {resolve(response.json());})
             .catch((err) => reject(err));
-        }) 
+        })
     },
-    
+
     addUser(data){
         let myHeaders = new Headers();
 		myHeaders.append('Content-Type', 'application/json');
@@ -35,8 +35,8 @@ login(data) {
                 body: JSON.stringify(data)
             }).then((response) => {resolve(response);})
             .catch((err) => reject(err));
-        }) 
-    },    
+        })
+    },
 
     getFoodOfCurrentDay(){
         let myHeaders = new Headers();
@@ -48,7 +48,7 @@ login(data) {
                 headers: myHeaders,
             }).then((response) => {resolve(response.json());})
             .catch((err) => reject(err));
-        })   
+        })
     },
 
     getFoodOfCurrentWeek(){
@@ -74,20 +74,20 @@ login(data) {
                 headers: myHeaders,
             }).then((response) => {resolve(response.json());})
             .catch((err) => reject(err));
-        })   
+        })
     },
 
     getUser(token){
         let myHeaders = new Headers();
         myHeaders.append('Content-Type', 'application/json');
-        // myHeaders.append('Authorization', token);
+        myHeaders.append('Authorization', token);
         return new Promise((resolve, reject) => {
             fetch(apiURL + '/user/token/' + token, {
                 method: 'GET',
                 headers: myHeaders,
             }).then((response) => {resolve(response.json());})
             .catch((err) => reject(err));
-        })   
+        })
     },
 }
 

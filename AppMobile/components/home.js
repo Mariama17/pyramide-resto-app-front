@@ -22,37 +22,45 @@ class Home extends React.Component {
       token: null,
       refreshing: true,
       platCommand: undefined,
-      user: null
+      user: null,
     };
   }
 
   getFoodOfCurrentDay = () => {
     if (this.props.route.params != undefined)
       this.setState({token: this.props.route.params.token});
-    rest
-      .getFoodOfCurrentDay()
-      .then(foodsOfDay => {
-        foodsOfDay.forEach((food, index) => {
-          rest.getImagesFood(food.id).then(images => {
-            Object.assign(food, {images});
-            foodsOfDay[index] = food;
+    this.setState({foodsOfDay: null}, () => {
+      rest
+        .getFoodOfCurrentDay()
+        .then(foodsOfDay => {
+          foodsOfDay.forEach((food, index) => {
+            rest.getImagesFood(food.id).then(images => {
+              Object.assign(food, {images});
+              foodsOfDay[index] = food;
+            });
           });
-        });
-        this.setState({foodsOfDay}, () => {
+          this.setState({foodsOfDay}, () => {
+            this.setState({refreshing: false});
+          });
+        })
+        .catch(() => {
           this.setState({refreshing: false});
         });
-      })
-      .catch(() => {
-        this.setState({refreshing: false});
-      });
+    });
   };
 
-  componentDidMount() {
+  componentDidUpdate() {
     const params = this.props.route.params;
     params != undefined &&
-    this.setState({token: this.props.route.params.token}, () => {
-      rest.getUser(params.token).then(user => {this.setState({user})})
-    })
+      this.state.token == null &&
+      this.setState({token: params.token}, () => {
+        rest.getUser(params.token).then(user => {
+          this.setState({user});
+        });
+      });
+  }
+
+  componentDidMount() {
     this.getFoodOfCurrentDay();
   }
 
@@ -65,8 +73,15 @@ class Home extends React.Component {
   }
 
   showModal = platCommand => {
+    const params = this.props.route.params;
     this.setState({showModal: true});
     if (platCommand != undefined) this.setState({platCommand});
+    this.state.token != null &&
+      this.setState({token: params.token}, () => {
+        rest.getUser(params.token).then(user => {
+          this.setState({user});
+        });
+      });
   };
 
   closeModal = () => {
@@ -89,23 +104,33 @@ class Home extends React.Component {
           <View style={styles.modalView}>
             {platCommand != undefined && (
               <View style={styles.Recap}>
-                <Text style={{fontSize: 20, fontWeight: 'bold', textAlign: 'center'}}>
+                <Text
+                  style={{
+                    fontSize: 20,
+                    fontWeight: 'bold',
+                    textAlign: 'center',
+                  }}>
                   Summary of your order
                 </Text>
-                <Text style={{margin: 10, color: 'black'}}>
-                  <Text style={{fontWeight: 'bold'}}>Food : </Text>{platCommand.name}
-                </Text>
-                <Text style={{margin: 10, color: 'black'}}>
-                <Text style={{fontWeight: 'bold'}}>Date : </Text>{platCommand.day} {platCommand.date}
-                </Text>
-                <Text style={{margin: 10, color: 'black'}}>
-                <Text style={{fontWeight: 'bold'}}>Price : </Text> 50 €
-                </Text>
-                {this.state.user != null &&
+                <View style={{marginLeft: 40, marginVertical: 15}}>
                   <Text style={{margin: 10, color: 'black'}}>
-                    <Text style={{fontWeight: 'bold'}}>Name : </Text> {this.state.user.firstName} {this.state.user.LastName}
+                    <Text style={{fontWeight: 'bold'}}>Food : </Text>
+                    {platCommand.name}
                   </Text>
-                }
+                  <Text style={{margin: 10, color: 'black'}}>
+                    <Text style={{fontWeight: 'bold'}}>Date : </Text>
+                    {platCommand.day} {platCommand.date}
+                  </Text>
+                  <Text style={{margin: 10, color: 'black'}}>
+                    <Text style={{fontWeight: 'bold'}}>Price : </Text> 50 €
+                  </Text>
+                  {this.state.user != null && (
+                    <Text style={{margin: 10, color: 'black'}}>
+                      <Text style={{fontWeight: 'bold'}}>Name : </Text>{' '}
+                      {this.state.user.firstName} {this.state.user.lastName}
+                    </Text>
+                  )}
+                </View>
               </View>
             )}
             <View style={{justifyContent: 'flex-end'}}>
@@ -159,6 +184,7 @@ class Home extends React.Component {
             <Plat
               plat={item}
               showModal={this.showModal}
+              token={this.state.token}
               navigation={this.props.navigation}
             />
           )}
@@ -193,7 +219,7 @@ const styles = StyleSheet.create({
   },
   Recap: {
     justifyContent: 'space-around',
-    top: 2
+    top: 2,
   },
 });
 

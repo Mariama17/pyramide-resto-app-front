@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, View, Text, StyleSheet, Button, text} from 'react-native';
+import {Image, View, Text, StyleSheet, Button, text} from 'react-native';
 import Carousel from 'react-native-snap-carousel';
 import SeeMore from 'react-native-see-more-inline';
 
@@ -20,6 +20,7 @@ class Plat extends React.Component {
 
   render() {
     const plat = this.props.plat;
+    console.log('props token plat : ', this.props.token);
     return (
       <View
         style={{
@@ -42,11 +43,11 @@ class Plat extends React.Component {
           />
           <Text style={styles.descriptionPlat}>{plat.name}</Text>
           <View style={styles.detailPlat}>
-            {plat != null &&
-            <SeeMore style={styles.detailPlat} numberOfLines={2}> 
-              {plat.ingredients}
-            </SeeMore> 
-            }
+            {plat != null && (
+              <SeeMore style={styles.detailPlat} numberOfLines={2}>
+                {plat.ingredients}
+              </SeeMore>
+            )}
           </View>
         </View>
         <View>
@@ -59,8 +60,9 @@ class Plat extends React.Component {
           <Button
             title="Commander"
             onPress={() => {
-              this.props.showModal(plat);
-              // this.props.navigation.navigate('Connexion');
+              this.props.token != null
+                ? this.props.showModal(plat)
+                : this.props.navigation.navigate('Connexion');
             }}
             color="#513a45"
           />
@@ -71,42 +73,43 @@ class Plat extends React.Component {
 }
 
 const styles = StyleSheet.create({
-    plat: {
-        left: 10.1,
-        width: 220,
-        height: 130,
-        top: 10, 
+  plat: {
+    left: 10.1,
+    width: 220,
+    height: 130,
+    top: 10,
+  },
+  container: {
+    backgroundColor: '#f7e0d2',
+    shadowColor: 'gray',
+    shadowOpacity: 0.8,
+    shadowRadius: 1,
+    shadowOffset: {
+      height: 0.5,
+      width: 0.1,
     },
-    container:{
-      backgroundColor:'#f7e0d2',
-      shadowColor: "gray",
-      shadowOpacity: 0.8,
-      shadowRadius: 1,
-      shadowOffset: {
-        height: 0.5,
-        width: 0.1,
-      }
-     },
-    descriptionPlat: {
-        color: '#513a45', 
-        fontWeight: 'bold',
-        textAlign: 'center',
-        fontSize: 20,
-        marginBottom: 5,
-        top: -60,
-    },
-    detailPlat: {
-        color: '#513a45', 
-        fontWeight: 'bold',
-        textAlign: 'center',
-        fontSize: 12,
-        top: -60,
-        marginLeft: 10
-    },
-    text: {
-        fontWeight: 'bold',
-        fontSize: 20,
-    },
+  },
+  descriptionPlat: {
+    color: '#513a45',
+    fontWeight: 'bold',
+    textAlign: 'center',
+    fontSize: 15,
+    marginBottom: 5,
+    marginTop: 5,
+    top: -60,
+  },
+  detailPlat: {
+    color: '#513a45',
+    fontWeight: 'bold',
+    textAlign: 'center',
+    fontSize: 12,
+    top: -60,
+    marginLeft: 10,
+  },
+  text: {
+    fontWeight: 'bold',
+    fontSize: 20,
+  },
 });
 
 export default Plat;
