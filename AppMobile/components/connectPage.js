@@ -23,7 +23,7 @@ class Connect extends React.Component {
         })
         .then(response => {
           this.setState({loading: false}, () => {
-            this.props.navigation.navigate('Menu du jour', {
+            this.props.navigation.navigate('Menu of the day', {
               token: response.token,
             });
           });

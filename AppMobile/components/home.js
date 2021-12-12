@@ -7,11 +7,13 @@ import {
   FlatList,
   Button,
   RefreshControl,
-  Text,
+  Text
 } from 'react-native';
 import Modal from 'react-native-modal';
 import Plat from './Plat.js';
 import rest from '../API/rest.js';
+import { FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
+import {faBars} from '@fortawesome/free-solid-svg-icons'
 
 class Home extends React.Component {
   constructor(props) {
