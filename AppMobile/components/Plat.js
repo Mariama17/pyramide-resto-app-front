@@ -68,13 +68,12 @@ class Plat extends React.Component {
 
 const styles = StyleSheet.create({
   plat: {
-    // left: 10.1,
-    width: 240, //220
+    width: 240,
     height: 130,
-    // top: 10,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
   },
   container: {
-    // backgroundColor: '#f7e0d2',
     opacity: 0.8,
     shadowColor: '#000',
     shadowOffset: {
@@ -82,9 +81,11 @@ const styles = StyleSheet.create({
       height: 3,
     },
     shadowOpacity: 10,
-    shadowRadius: 10,
+    shadowRadius: 20,
     elevation: 6,
     borderRadius: 20,
+    borderTopLeftRadius: 30,
+    borderTopRightRadius: 30,
   },
   descriptionPlat: {
     color: '#513a45',
