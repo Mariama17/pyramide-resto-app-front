@@ -7,14 +7,16 @@ import {
   FlatList,
   Button,
   RefreshControl,
-  Text
+  Text,
 } from 'react-native';
+import {Snackbar} from 'react-native-paper';
 import Modal from 'react-native-modal';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Plat from './Plat.js';
 import rest from '../API/rest.js';
-import { FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
-import {faBars} from '@fortawesome/free-solid-svg-icons'
+import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
+import {faBars} from '@fortawesome/free-solid-svg-icons';
+import {faClock} from '@fortawesome/free-regular-svg-icons';
 
 class Home extends React.Component {
   constructor(props) {
@@ -24,6 +26,7 @@ class Home extends React.Component {
       foodsOfDay: null,
       token: null,
       refreshing: true,
+      snackbarVisible: false,
       platCommand: undefined,
       user: null,
     };
@@ -86,6 +89,11 @@ class Home extends React.Component {
     this.setState({showModal: false});
   };
 
+  handleSuccessCommand = () => {
+    this.closeModal();
+    this.setState({snackbarVisible: true});
+  };
+
   handleModal = () => {
     const platCommand = this.state.platCommand;
     return (
@@ -145,7 +153,7 @@ class Home extends React.Component {
                 }}>
                 <Button
                   title="Sur place"
-                  onPress={this.closeModal}
+                  onPress={this.handleSuccessCommand}
                   color="#4c3737"
                 />
               </View>
@@ -161,7 +169,7 @@ class Home extends React.Component {
                 }}>
                 <Button
                   title="emporter"
-                  onPress={this.closeModal}
+                  onPress={this.handleSuccessCommand}
                   color="#4c3737"
                 />
               </View>
@@ -177,6 +185,28 @@ class Home extends React.Component {
       <SafeAreaView
         style={{flex: 1, alignItems: 'center', backgroundColor: '#f7e0d2'}}>
         {this.handleModal()}
+        <Snackbar
+          style={{backgroundColor: '#f7e0d2'}}
+          visible={this.state.snackbarVisible}
+          onDismiss={() => this.setState({snackbarVisible: false})}
+          action={{
+            label: 'Undo',
+            onPress: () => {
+              this.showModal();
+            },
+          }}>
+          <View
+            style={{
+              flex: 1,
+              flexDirection: 'row',
+              justifyContent: 'space-around',
+            }}>
+            <Text style={{color: 'black', marginRight: 15}}>
+              Your order is on its way
+            </Text>
+            <FontAwesomeIcon icon={faClock} size={20} color='#5f4a4a'/>
+          </View>
+        </Snackbar>
         <FlatList
           data={this.state.foodsOfDay}
           keyExtractor={item => item.id}

@@ -1,4 +1,4 @@
-const apiURL = 'http://192.168.1.47:1998';
+const apiURL = 'http://yvandev.fr:1998';
 
 const rest = {
   // login (data) {
