@@ -97,7 +97,7 @@ class Connect extends React.Component {
               mode="contained"
               onPress={() => this.props.navigation.navigate('Inscription')}
               color="#5f4a4a">
-              S'inscrire
+              Sign up
             </Button>
           </View>
         </View>
@@ -129,7 +129,6 @@ const styles = StyleSheet.create({
     fontSize: 15,
   },
   btn: {
-    // fontWeight: 'bold',
     height: 50,
     width: 180,
   },
