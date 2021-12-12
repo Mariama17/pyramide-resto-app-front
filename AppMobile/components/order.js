@@ -19,7 +19,7 @@ class Order extends React.Component {
 
                    <View style={{backgroud: "#4c3737" ,width:140, right: 10, height:38,  top: 155, left: 25, flexDirection: 'row'}}>
                         <Button
-                            title="Sur place"
+                            title="On site "
                             onPress={onPressHandler}
                             color= "#4c3737"
                         />
@@ -27,7 +27,7 @@ class Order extends React.Component {
 
                    <View style={{backgroud: "#4c3737" ,width:140, left: 180, height:38,  top: 116, right: 25, flexDirection: 'row'}}>
                         <Button
-                            title="emporter"
+                            title="Take away"
                             onPress={onPressHandler}
                             color= "#4c3737"
                         />

@@ -112,7 +112,7 @@ class MenuWeek extends React.Component {
                 flexDirection: 'row',
               }}>
               <Button
-                title="Sur place"
+                title="On site"
                 onPress={this.closeModal}
                 color="#4c3737"
               />
@@ -128,7 +128,7 @@ class MenuWeek extends React.Component {
                 flexDirection: 'row',
               }}>
               <Button
-                title="emporter"
+                title="Take away"
                 onPress={this.closeModal}
                 color="#4c3737"
               />

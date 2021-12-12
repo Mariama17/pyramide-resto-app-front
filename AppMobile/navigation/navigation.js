@@ -28,7 +28,7 @@ class Navigator extends React.Component {
           component={Drawer}
           options={{headerShown: false}}
         />
-        <Stack.Screen name="Connexion" component={Connect} />
+        <Stack.Screen name="Connect" component={Connect} />
         <Stack.Screen name="Inscription" component={CreateCompte} />
       </Stack.Navigator>
     );

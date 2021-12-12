@@ -58,12 +58,12 @@ class Plat extends React.Component {
         </View>
         <View style={{width: 150, bottom: 40, left: 40}}>
           <Button
-            title="Commander"
             disabled={plat.day !== dayOfWeek[currentDay].toLocaleUpperCase()}
+            title="Order"
             onPress={() => {
               this.props.token != null
                 ? this.props.showModal(plat)
-                : this.props.navigation.navigate('Connexion');
+                : this.props.navigation.navigate('Connect');
             }}
             color="#513a45"
           />

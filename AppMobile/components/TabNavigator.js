@@ -20,10 +20,10 @@ class TabNavigator extends React.Component {
           tabBarIcon: ({focused, color, size}) => {
             let iconName;
             switch (route.name) {
-              case 'Menus du jour':
+              case 'Menus of the day':
                 iconName = faHamburger;
                 break;
-              case 'Menus de la semaine':
+              case 'Menus of the week':
                 iconName = faCalendarDay;
                 break;
               default:
@@ -44,8 +44,8 @@ class TabNavigator extends React.Component {
           showIcon: true,
           // activeBackgroundColor: '#f7e0d2',
         }}>
-        <Tab.Screen name="Menus du jour" component={Home} />
-        <Tab.Screen name="Menus de la semaine" component={MenuWeek} />
+        <Tab.Screen name="Menus of the day" component={Home} />
+        <Tab.Screen name="Menus of the week" component={MenuWeek} />
       </Tab.Navigator>
     );
   }

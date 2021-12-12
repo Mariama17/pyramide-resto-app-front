@@ -152,8 +152,8 @@ class Home extends React.Component {
                   flexDirection: 'row',
                 }}>
                 <Button
-                  title="Sur place"
                   onPress={this.handleSuccessCommand}
+                  title="On site"
                   color="#4c3737"
                 />
               </View>
@@ -168,8 +168,8 @@ class Home extends React.Component {
                   flexDirection: 'row',
                 }}>
                 <Button
-                  title="emporter"
                   onPress={this.handleSuccessCommand}
+                  title="Take away"
                   color="#4c3737"
                 />
               </View>
@@ -250,6 +250,7 @@ const styles = StyleSheet.create({
   Recap: {
     flex: 1,
     justifyContent: 'space-around',
+    top: 10
   },
 });
 

@@ -48,25 +48,25 @@ class CreateCompte extends React.Component {
         <View style={styles.body_container}>
           <TextInput
             onChangeText={text => this.setState({nom: text})}
-            placeholder="Nom"
+            placeholder="Last name"
           />
           <TextInput
             onChangeText={text => this.setState({prenom: text})}
-            placeholder="Prenom"
+            placeholder="First Name"
           />
           <TextInput
             onChangeText={text => this.setState({age: text})}
-            placeholder="age"
+            placeholder="Age"
           />
           <TextInput
             onChangeText={text => this.setState({email: text})}
-            placeholder="Adresse email"
+            placeholder="Email"
             keyboardType="email-address"
           />
           <TextInput
             onChangeText={text => this.setState({password: text})}
             secureTextEntry={true}
-            placeholder="Mot de passe"
+            placeholder="Password"
           />
           <Button
             style={styles.btn}
