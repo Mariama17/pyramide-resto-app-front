@@ -4,6 +4,7 @@ import TabNavigator from '../components/TabNavigator.js';
 import Account from './account.js';
 import About from './about.js';
 import Connect from './connectPage.js';
+import Principal from './principal.js'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import rest from '../API/rest.js';
 
@@ -37,9 +38,10 @@ class Drawer extends React.Component {
           options={{headerShown: false}}
         />
         {this.state.token != null && (
-          <Drawer.Screen name="Mon Compte" component={Account} />
+          <Drawer.Screen name="My account" component={Account} />
         )}
-        <Drawer.Screen name="A propos" component={About} />
+        <Drawer.Screen name="About" component={About} />
+        <Drawer.Screen name="Schedule" component={Principal} />
         {this.state.token != null && this.state.user != null ? (
           <Drawer.Screen
             name={this.state.user.firstName + ' - Déconnexion'}
@@ -48,7 +50,7 @@ class Drawer extends React.Component {
           />
         ) : (
           <Drawer.Screen
-            name="Connexion"
+            name="Connect"
             component={Connect}
             options={{headerShown: false}}
           />

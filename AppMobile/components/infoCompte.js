@@ -27,7 +27,7 @@ class InfoCompte extends React.Component {
                     />
                     <TextInput style={styles.age}
                         onChangeText={onChangeNumber}
-                        placeholder="age"
+                        placeholder="Age"
                         
                     />
                 </View> 

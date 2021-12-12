@@ -41,33 +41,33 @@ class CreateCompte extends React.Component {
                 <View style={{flex: 1}}>
                     <TextInput style={styles.Identifiant}
                         onChangeText={text => this.setState({nom: text})}
-                        placeholder="Nom"
+                        placeholder="Name"
                         keyboardType="email-address"
                     />
                     <TextInput style={styles.Identifiant}
                         onChangeText={text => this.setState({prenom: text})}
-                        placeholder="Prenom"
+                        placeholder="First Name"
                         keyboardType="email-address"
                     />
                     <TextInput style={styles.Identifiant}
                         onChangeText={text => this.setState({email: text})}
-                        placeholder="Adresse email"
+                        placeholder="Email"
                         keyboardType="email-address"
                     />
                     <TextInput style={styles.Identifiant}
                         onChangeText={text => this.setState({password: text})}
-                        placeholder="Mot de passe"
+                        placeholder="password"
                         keyboardType="default"
                     />
                     <TextInput style={styles.Identifiant}
                         onChangeText={text => this.setState({confirmPassword: text})}
-                        placeholder="Confirmer le mot de passe"
+                        placeholder="Confirm password"
                         keyboardType="default"
                     />
                 </View>
                 <View style={styles.buttonContainer}>
                     <Button 
-                        title="S'inscrire"
+                        title="Sign up"
                         // onPress={() => {this.props.navigation.navigate('Drawer')}}
                         onPress={this.addUser}
                         color= "#5f4a4a"

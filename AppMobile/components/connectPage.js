@@ -41,7 +41,7 @@ class Connect extends React.Component {
           this.setState({loading: false}, async () => {
             try {
               await AsyncStorage.setItem('token', response.token);
-              this.props.navigation.navigate('Menus du jour');
+              this.props.navigation.navigate('Menus of the day');
             } catch (error) {}
           });
         })
@@ -67,7 +67,7 @@ class Connect extends React.Component {
             activeUnderlineColor="#f7e0d2"
             activeOutlineColor="#f7e0d2"
             onChangeText={text => this.setState({email: text})}
-            placeholder="Identifiant"
+            placeholder="Login"
           />
           <TextInput
             type="outlined"
@@ -78,7 +78,7 @@ class Connect extends React.Component {
             activeUnderlineColor="#f7e0d2"
             activeOutlineColor="#f7e0d2"
             onChangeText={text => this.setState({password: text})}
-            placeholder="Mot de passe"
+            placeholder="Password"
             keyboardType="default"
           />
           <PasswordStrengthMeterBar password={this.state.password} />
@@ -91,13 +91,13 @@ class Connect extends React.Component {
               color="#5f4a4a">
               Sign in
             </Button>
-            <Text style={styles.forgotPassword}>Mot de passe oublié ?</Text>
+            <Text style={styles.forgotPassword}>Forgot your password ?</Text>
             <Button
               style={styles.btn}
               mode="contained"
               onPress={() => this.props.navigation.navigate('Inscription')}
               color="#5f4a4a">
-              S'inscrire
+              Sign up
             </Button>
           </View>
         </View>
@@ -118,7 +118,7 @@ const styles = StyleSheet.create({
   },
   input: {
     flex: 1,
-    marginTop: 50,
+    marginTop: 10,
     width: 250,
     // justifyContent: 'space-around',
   },
@@ -127,11 +127,13 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textDecorationLine: 'underline',
     fontSize: 15,
+    top: -40
   },
   btn: {
     // fontWeight: 'bold',
-    height: 50,
+    height: 40,
     width: 180,
+    top: -30
   },
   bottomScreen: {
     flex: 1,

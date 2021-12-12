@@ -56,19 +56,19 @@ class About extends React.Component {
                     onSnapToItem = { index => this.setState({activeIndex:index}) } />  
                 </View> 
                 <View style={styles.aboutUs}>
-                    <SeeMore numberOfLines={7}> 
-                        Le Royal vous fait vivre une ambiance chaleureuse et conviviale 
-                        autour de ses tables prestigieuses ayant une vue panoramique sur Paris.
-                        Avec un accueil chaleureux, le Royal vous donne l’occasion de vivre une expérience culinaire extraordinaire
-                        Des pâtes aux desserts, tout est frais et fait maison. Découvrez la cuisine entre traditions du terroir et 
-                        nouvelles idées avec nos plaisirs de la table. 
-                        Une cuisine qui représente un savoureux mélange d’épices et de saveurs sucrées/salées et qui promet un 
-                        voyage culinaire haut en couleur. Une cuisine raffinée et des recettes revisitées rigoureusement sélectionnées 
-                        dans un cadre chic et chaleureux.
-                        La grande salle du Royal, bordée d’un jardin de jasmins, confère à l’endroit une atmosphère particulière propre à 
-                        la détente et à la découverte gastronomique. Tout est mis en œuvre, à la plus grande satisfaction des heureux convives, 
-                        pour que ce moment de plaisir reste gravé dans les mémoires. Le maître de maison garde ses origines méditerranéennes bien 
-                        ancrées en apportant un soin particulier à l’accueil de sa clientèle, qu’elle soit habituée, curieuse ou simplement de passage.
+                    <SeeMore numberOfLines={7} style={{color: 'black'}}> 
+                        The Royal offers a warm and friendly atmosphere 
+                        around its prestigious tables with a panoramic view of Paris.
+                        With a warm welcome, Le Royal gives you the opportunity to live an extraordinary culinary experience
+                        From pasta to desserts, everything is fresh and home-made. Discover the cuisine between local traditions and 
+                        and new ideas with our pleasures of the table. 
+                        A cuisine that represents a tasty mix of spices and sweet/salty flavors and promises a colorful culinary 
+                        a colorful culinary journey. A refined cuisine and revisited recipes rigorously selected 
+                        in a chic and warm setting.
+                        The large room of the Royal, bordered by a garden of jasmines, gives the place a special atmosphere suitable for 
+                        to relaxation and gastronomic discovery. Everything is done to the greatest satisfaction of the happy guests, 
+                        so that this moment of pleasure remains engraved in the memories. The master of the house keeps his Mediterranean origins well 
+                        The master of the house keeps his Mediterranean origins well anchored by bringing a particular care to the reception of his clientele, that it is regular, curious or simply of passage.
                     </SeeMore>
                 </View>
                 {/* <View style={styles.maps}>

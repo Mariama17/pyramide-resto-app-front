@@ -144,7 +144,7 @@ class Home extends React.Component {
                   flexDirection: 'row',
                 }}>
                 <Button
-                  title="Sur place"
+                  title="On site"
                   onPress={this.closeModal}
                   color="#4c3737"
                 />
@@ -160,7 +160,7 @@ class Home extends React.Component {
                   flexDirection: 'row',
                 }}>
                 <Button
-                  title="emporter"
+                  title="Take away"
                   onPress={this.closeModal}
                   color="#4c3737"
                 />
@@ -220,6 +220,7 @@ const styles = StyleSheet.create({
   Recap: {
     flex: 1,
     justifyContent: 'space-around',
+    top: 10
   },
 });
 
