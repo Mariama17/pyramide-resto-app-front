@@ -32,7 +32,7 @@ class Drawer extends React.Component {
     return (
       <Drawer.Navigator>
         <Drawer.Screen
-          name="Accueil"
+          name="Home"
           component={TabNavigator}
           options={{headerShown: false}}
         />

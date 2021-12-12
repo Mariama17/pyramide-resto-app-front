@@ -9,9 +9,10 @@ import Account from '../components/account.js';
 import About from '../components/about.js';
 import TabNavigator from '../components/TabNavigator.js';
 import { FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
-import {faBars} from '@fortawesome/free-solid-svg-icons'
+import {faHome} from '@fortawesome/free-solid-svg-icons'
 import {Button, View} from 'react-native';
 import Drawer from '../components/DrawerNavigator.js';
+import Principal from '../components/principal.js';
 
 class Navigator extends React.Component {
   constructor(props) {
