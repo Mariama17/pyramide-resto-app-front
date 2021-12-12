@@ -19,13 +19,32 @@ class MenuWeek extends React.Component {
       showModal: false,
       foodsOfDay: null,
       token: null,
+      user: null,
       refreshing: true,
     };
   }
 
-  componentDidMount() {
+  componentDidMount = async () => {
     this.getFoodOfCurrentWeek();
+    this.setTokenAndUser();
+    this._unsubscribe = this.props.navigation.addListener('focus', () => {
+      this.setTokenAndUser();
+    });
+  };
+
+  componentWillUnmount() {
+    this._unsubscribe();
   }
+
+  setTokenAndUser = async () => {
+    try {
+      const token = await AsyncStorage.getItem('token');
+      this.setState({token});
+      rest.getUser(token).then(user => {
+        this.setState({user});
+      });
+    } catch (err) {}
+  };
 
   getFoodOfCurrentWeek = () => {
     if (this.props.route.params != undefined)
@@ -34,7 +53,10 @@ class MenuWeek extends React.Component {
       this.setState({foodsOfDay: null}, async () => {
         foodsOfDay = await rest.getFoodOfCurrentWeek();
         foodsOfDay.forEach(async (food, index) => {
-          if (index === 0 || foodsOfDay[index].day !== foodsOfDay[index - 1].day)
+          if (
+            index === 0 ||
+            foodsOfDay[index].day !== foodsOfDay[index - 1].day
+          )
             // Affichage jour pour les menu de la semaine
             Object.assign(food, {handleDay: true});
           images = await rest.getImagesFood(food.id);

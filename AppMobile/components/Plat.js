@@ -20,6 +20,8 @@ class Plat extends React.Component {
 
   render() {
     const plat = this.props.plat;
+    const currentDay = new Date().getDay();
+    const dayOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
     return (
       <View
         style={ {
@@ -57,6 +59,7 @@ class Plat extends React.Component {
         <View style={{width: 150, bottom: 40, left: 40}}>
           <Button
             title="Commander"
+            disabled={plat.day !== dayOfWeek[currentDay].toLocaleUpperCase()}
             onPress={() => {
               this.props.token != null
                 ? this.props.showModal(plat)
