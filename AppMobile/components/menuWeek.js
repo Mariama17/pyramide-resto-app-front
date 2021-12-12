@@ -19,27 +19,33 @@ class MenuWeek extends React.Component {
       showModal: false,
       foodsOfDay: null,
       token: null,
-    //   refreshing: true,
+      refreshing: true,
     };
   }
 
   componentDidMount() {
-    // console.log('this.props.route.params: ', this.props.route.params);
+    this.getFoodOfCurrentWeek();
+  }
+
+  getFoodOfCurrentWeek = () => {
     if (this.props.route.params != undefined)
       this.setState({token: this.props.route.params.token});
-    rest
-      .getFoodOfCurrentWeek()
-      .then(foodsOfDay => {
-        foodsOfDay.forEach((food, index) => {
-          rest.getImagesFood(food.id).then(images => {
-            Object.assign(food, {images});
-            foodsOfDay[index] = food;
-          });
+    try {
+      this.setState({foodsOfDay: null}, async () => {
+        foodsOfDay = await rest.getFoodOfCurrentWeek();
+        foodsOfDay.forEach(async (food, index) => {
+          images = await rest.getImagesFood(food.id);
+          Object.assign(food, {images});
+          foodsOfDay[index] = food;
         });
-        this.setState({foodsOfDay});
-      })
-      .catch(() => {});
-  }
+        this.setState({foodsOfDay}, () => {
+          this.setState({refreshing: false});
+        });
+      });
+    } catch (error) {
+      this.setState({refreshing: false});
+    }
+  };
 
   _renderItem({item}) {
     return (
@@ -113,22 +119,23 @@ class MenuWeek extends React.Component {
       <SafeAreaView
         style={{flex: 1, alignItems: 'center', backgroundColor: '#f7e0d2'}}>
         {this.handleModal()}
-            <FlatList
-            data={this.state.foodsOfDay}
-            renderItem={({item}) => (
-                <Plat
-                    plat={item}
-                    showModal={this.showModal}
-                    navigation={this.props.navigation}
-                />
-            )}
-            // refreshControl={
-            //     <RefreshControl
-            //       refreshing={this.state.refreshing}
-            //       onRefresh={this.getFoodOfCurrentDay}
-            //     />
-            // }
-            keyExtractor={item => item.id}
+        <FlatList
+          data={this.state.foodsOfDay}
+          keyExtractor={item => item.id}
+          showsVerticalScrollIndicator={false}
+          renderItem={({item}) => (
+            <Plat
+              plat={item}
+              showModal={this.showModal}
+              navigation={this.props.navigation}
+            />
+          )}
+          refreshControl={
+            <RefreshControl
+              refreshing={this.state.refreshing}
+              onRefresh={this.getFoodOfCurrentWeek}
+            />
+          }
         />
       </SafeAreaView>
     );

@@ -1,7 +1,8 @@
 import React from 'react';
-import { View, SafeAreaView, StyleSheet, Image, Text, Alert } from 'react-native';
+import {View, SafeAreaView, StyleSheet, Image, Text, Alert} from 'react-native';
 import {Button, TextInput} from 'react-native-paper';
-// import { TextInput } from 'react-native-paper';
+import PasswordStrengthMeterBar from 'react-native-password-strength-meter-bar';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import rest from '../API/rest.js';
 
 class Connect extends React.Component {
@@ -14,7 +15,22 @@ class Connect extends React.Component {
     };
   }
 
-    login = () => {
+  componentDidMount = async () => {
+    try {
+      this._unsubscribe = this.props.navigation.addListener(
+        'focus',
+        async () => {
+          await AsyncStorage.removeItem('token');
+        },
+      );
+    } catch (e) {}
+  };
+
+  componentWillUnmount() {
+    this._unsubscribe();
+  }
+
+  login = () => {
     this.setState({loading: true}, () => {
       rest
         .login({
@@ -22,63 +38,68 @@ class Connect extends React.Component {
           password: this.state.password,
         })
         .then(response => {
-          this.setState({loading: false}, () => {
-            this.props.navigation.navigate('Menu du jour', {
-              token: response.token,
-            });
+          this.setState({loading: false}, async () => {
+            try {
+              await AsyncStorage.setItem('token', response.token);
+              this.props.navigation.navigate('Menus du jour');
+            } catch (error) {}
           });
         })
-          .catch((err) => {
-            console.log(console.log('err : ', err));
+        .catch(err => {
           this.setState({loading: false}, () => {
-            Alert.alert('identifiants incorrects ');
+            Alert.alert('identifiants incorrect');
           });
         });
     });
   };
 
   render() {
-    // const [text, setText] = React.useState('');
     return (
       <SafeAreaView style={styles.container}>
         <Image style={styles.image} source={require('../images/index.jpg')} />
-        <View>
+        <View style={styles.input}>
           <TextInput
-            style={styles.Identifiant}
-            Type="outlined"
+            style={{marginBottom: 20}}
+            type="outlined"
+            mode="outlined"
+            selectionColor="#f7e0d2"
+            underlineColor="#f7e0d2"
+            activeUnderlineColor="#f7e0d2"
+            activeOutlineColor="#f7e0d2"
             onChangeText={text => this.setState({email: text})}
             placeholder="Identifiant"
           />
           <TextInput
-            style={styles.Mdp}
+            type="outlined"
+            mode="outlined"
+            secureTextEntry={true}
+            selectionColor="#f7e0d2"
+            underlineColor="#f7e0d2"
+            activeUnderlineColor="#f7e0d2"
+            activeOutlineColor="#f7e0d2"
             onChangeText={text => this.setState({password: text})}
             placeholder="Mot de passe"
             keyboardType="default"
           />
-        </View>
-        <Text style={styles.forgotPassword}>Mot de passe oublié ?</Text>
-        <View style={styles.buttonContainer}>
-          <Button
-            mode="outlined"
-            onPress={this.login}
-            style={{color: '#5f4a4a'}}
-            loading={this.state.loading}>
-            Sign in
-          </Button>
-          {/* <Button
-                title="Se connecter"
-                // onPress={() => {this.props.navigation.navigate('Drawer')}}
-                onPress={this.login}
-                color="#5f4a4a"
-              /> */}
-        </View>
-        <View style={styles.buttonContainer2}>
-          <Button
-            title="S'inscrire"
-            // onPress={onPressHandler}
-            onPress={() => this.props.navigation.navigate('Inscription')}
-            color="#5f4a4a"
-          />
+          <PasswordStrengthMeterBar password={this.state.password} />
+          <View style={styles.bottomScreen}>
+            <Button
+              style={styles.btn}
+              mode="contained"
+              onPress={this.login}
+              loading={this.state.loading}
+              color="#5f4a4a">
+              Sign in
+            </Button>
+            <Text style={styles.forgotPassword}>Mot de passe oublié ?</Text>
+            <Button
+              style={styles.btn}
+              mode="contained"
+              onPress={() => this.props.navigation.navigate('Inscription')}
+              color="#5f4a4a">
+              S'inscrire
+            </Button>
+          </View>
         </View>
       </SafeAreaView>
     );
@@ -87,51 +108,36 @@ class Connect extends React.Component {
 
 const styles = StyleSheet.create({
   image: {
-    top: 10,
     height: 225,
     width: 220,
-    left: 70,
   },
   container: {
+    flex: 1,
     backgroundColor: '#513a45',
+    alignItems: 'center',
   },
-  Identifiant: {
-    height: 40,
+  input: {
+    flex: 1,
+    marginTop: 50,
     width: 250,
-    // margin: 10,
-    marginVertical: 50,
-    left: 45,
-    top: 10,
-  },
-  Mdp: {
-    height: 40,
-    width: 250,
-    // margin: 10,
-    marginBottom: 10,
-    left: 45,
-    top: 10,
+    // justifyContent: 'space-around',
   },
   forgotPassword: {
     color: '#f7e0d2',
     fontWeight: 'bold',
     textDecorationLine: 'underline',
     fontSize: 15,
-    left: 110,
-    top: 120,
   },
-  buttonContainer: {
-    fontWeight: 'bold',
-    height: 200,
-    width: 200,
-    left: 82,
-    top: 140,
+  btn: {
+    // fontWeight: 'bold',
+    height: 50,
+    width: 180,
   },
-  buttonContainer2: {
-    fontWeight: 'bold',
-    height: 200,
-    width: 200,
-    left: 82,
-    top: -10,
+  bottomScreen: {
+    flex: 1,
+    alignItems: 'center',
+    marginTop: 30,
+    justifyContent: 'space-around',
   },
 });
 

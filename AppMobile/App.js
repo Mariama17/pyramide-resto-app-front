@@ -23,8 +23,8 @@ class App extends React.Component {
     return (
       <NavigationContainer>
         <View style={{flex: 1}}>
-          {/* <Navigator />  */}
-          <SplashScreen/>
+          {/* <SplashScreen/> */}
+          <Navigator />
         </View>
       </NavigationContainer>
     );

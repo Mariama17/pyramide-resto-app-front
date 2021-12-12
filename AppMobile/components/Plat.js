@@ -20,27 +20,26 @@ class Plat extends React.Component {
 
   render() {
     const plat = this.props.plat;
-    console.log('props token plat : ', this.props.token);
     return (
       <View
         style={{
-          borderWidth: 1,
-          borderColor: '#f7e0d2',
+          marginTop: 7,
           width: 240,
           height: 'auto',
-          justifyContent: 'space-between',
         }}>
         <View elevation={3} style={styles.container}>
-          <Carousel
-            layout={'default'}
-            ref={ref => (this.carousel = ref)}
-            data={plat.images}
-            sliderWidth={300}
-            itemWidth={320}
-            height={200}
-            renderItem={this._renderItem}
-            onSnapToItem={index => this.setState({activeIndex: index})}
-          />
+          {plat.images != null && (
+            <Carousel
+              layout={'default'}
+              ref={ref => (this.carousel = ref)}
+              data={plat.images}
+              sliderWidth={300}
+              itemWidth={320}
+              height={200}
+              renderItem={this._renderItem}
+              onSnapToItem={index => this.setState({activeIndex: index})}
+            />
+          )}
           <Text style={styles.descriptionPlat}>{plat.name}</Text>
           <View style={styles.detailPlat}>
             {plat != null && (
@@ -50,12 +49,7 @@ class Plat extends React.Component {
             )}
           </View>
         </View>
-        <View>
-          {/* <Text style={styles.descriptionPlat}>{plat.nom}</Text>
-          <Text style={styles.detailPlat}>
-            {plat.description}
-          </Text> */}
-        </View>
+        <View></View>
         <View style={{width: 150, bottom: 40, left: 40}}>
           <Button
             title="Commander"
@@ -74,20 +68,23 @@ class Plat extends React.Component {
 
 const styles = StyleSheet.create({
   plat: {
-    left: 10.1,
-    width: 220,
+    // left: 10.1,
+    width: 240, //220
     height: 130,
-    top: 10,
+    // top: 10,
   },
   container: {
-    backgroundColor: '#f7e0d2',
-    shadowColor: 'gray',
-    shadowOpacity: 0.8,
-    shadowRadius: 1,
+    // backgroundColor: '#f7e0d2',
+    opacity: 0.8,
+    shadowColor: '#000',
     shadowOffset: {
-      height: 0.5,
-      width: 0.1,
+      width: 3,
+      height: 3,
     },
+    shadowOpacity: 10,
+    shadowRadius: 10,
+    elevation: 6,
+    borderRadius: 20,
   },
   descriptionPlat: {
     color: '#513a45',

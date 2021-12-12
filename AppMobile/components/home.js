@@ -10,6 +10,7 @@ import {
   Text,
 } from 'react-native';
 import Modal from 'react-native-modal';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import Plat from './Plat.js';
 import rest from '../API/rest.js';
 
@@ -26,43 +27,45 @@ class Home extends React.Component {
     };
   }
 
-  getFoodOfCurrentDay = () => {
-    if (this.props.route.params != undefined)
-      this.setState({token: this.props.route.params.token});
-    this.setState({foodsOfDay: null}, () => {
-      rest
-        .getFoodOfCurrentDay()
-        .then(foodsOfDay => {
-          foodsOfDay.forEach((food, index) => {
-            rest.getImagesFood(food.id).then(images => {
-              Object.assign(food, {images});
-              foodsOfDay[index] = food;
-            });
-          });
-          this.setState({foodsOfDay}, () => {
-            this.setState({refreshing: false});
-          });
-        })
-        .catch(() => {
-          this.setState({refreshing: false});
-        });
+  componentDidMount = async () => {
+    this.getFoodOfCurrentDay();
+    this.setTokenAndUser();
+    this._unsubscribe = this.props.navigation.addListener('focus', () => {
+      this.setTokenAndUser();
     });
   };
 
-  componentDidUpdate() {
-    const params = this.props.route.params;
-    params != undefined &&
-      this.state.token == null &&
-      this.setState({token: params.token}, () => {
-        rest.getUser(params.token).then(user => {
-          this.setState({user});
-        });
-      });
+  componentWillUnmount() {
+    this._unsubscribe();
   }
 
-  componentDidMount() {
-    this.getFoodOfCurrentDay();
-  }
+  setTokenAndUser = async () => {
+    try {
+      const token = await AsyncStorage.getItem('token');
+      this.setState({token});
+      rest.getUser(token).then(user => {
+        this.setState({user});
+      });
+    } catch (err) {}
+  };
+
+  getFoodOfCurrentDay = () => {
+    try {
+      this.setState({foodsOfDay: null}, async () => {
+        foodsOfDay = await rest.getFoodOfCurrentDay();
+        foodsOfDay.forEach(async (food, index) => {
+          images = await rest.getImagesFood(food.id);
+          Object.assign(food, {images});
+          foodsOfDay[index] = food;
+        });
+        this.setState({foodsOfDay}, () => {
+          this.setState({refreshing: false});
+        });
+      });
+    } catch (error) {
+      this.setState({refreshing: false});
+    }
+  };
 
   _renderItem({item}) {
     return (
@@ -73,15 +76,8 @@ class Home extends React.Component {
   }
 
   showModal = platCommand => {
-    const params = this.props.route.params;
     this.setState({showModal: true});
     if (platCommand != undefined) this.setState({platCommand});
-    this.state.token != null &&
-      this.setState({token: params.token}, () => {
-        rest.getUser(params.token).then(user => {
-          this.setState({user});
-        });
-      });
   };
 
   closeModal = () => {
@@ -108,6 +104,7 @@ class Home extends React.Component {
                   style={{
                     fontSize: 20,
                     fontWeight: 'bold',
+                    color: 'black',
                     textAlign: 'center',
                   }}>
                   Summary of your order
@@ -180,6 +177,8 @@ class Home extends React.Component {
         {this.handleModal()}
         <FlatList
           data={this.state.foodsOfDay}
+          keyExtractor={item => item.id}
+          showsVerticalScrollIndicator={false}
           renderItem={({item}) => (
             <Plat
               plat={item}
@@ -194,7 +193,6 @@ class Home extends React.Component {
               onRefresh={this.getFoodOfCurrentDay}
             />
           }
-          keyExtractor={item => item.id}
         />
       </SafeAreaView>
     );
@@ -218,8 +216,8 @@ const styles = StyleSheet.create({
     // justifyContent: 'flex-end',
   },
   Recap: {
+    flex: 1,
     justifyContent: 'space-around',
-    top: 2,
   },
 });
 
