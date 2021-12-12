@@ -1,5 +1,5 @@
 import React from 'react';
-import {Image, View, Text, StyleSheet, Button, text} from 'react-native';
+import {Image, View, Text, StyleSheet, Button} from 'react-native';
 import Carousel from 'react-native-snap-carousel';
 import SeeMore from 'react-native-see-more-inline';
 
@@ -22,11 +22,16 @@ class Plat extends React.Component {
     const plat = this.props.plat;
     return (
       <View
-        style={{
+        style={ {
+          flex: 1,
           marginTop: 7,
-          width: 240,
           height: 'auto',
-        }}>
+        } }>
+        { plat.handleDay != undefined &&
+          <View style={styles.dayView}>
+            <Text style={{fontSize: 25, color:"#5f4a4a"}}>{ plat.day } </Text>
+          </View>
+        }
         <View elevation={3} style={styles.container}>
           {plat.images != null && (
             <Carousel
@@ -49,7 +54,6 @@ class Plat extends React.Component {
             )}
           </View>
         </View>
-        <View></View>
         <View style={{width: 150, bottom: 40, left: 40}}>
           <Button
             title="Commander"
@@ -67,6 +71,11 @@ class Plat extends React.Component {
 }
 
 const styles = StyleSheet.create({
+  dayView: {
+    flex: 1,
+    justifyContent: 'flex-start',
+    marginBottom: 15,
+  },
   plat: {
     width: 240,
     height: 130,
@@ -74,6 +83,7 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 20,
   },
   container: {
+    width: 240,
     opacity: 0.8,
     shadowColor: '#000',
     shadowOffset: {

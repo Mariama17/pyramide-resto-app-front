@@ -34,6 +34,9 @@ class MenuWeek extends React.Component {
       this.setState({foodsOfDay: null}, async () => {
         foodsOfDay = await rest.getFoodOfCurrentWeek();
         foodsOfDay.forEach(async (food, index) => {
+          if (index === 0 || foodsOfDay[index].day !== foodsOfDay[index - 1].day)
+            // Affichage jour pour les menu de la semaine
+            Object.assign(food, {handleDay: true});
           images = await rest.getImagesFood(food.id);
           Object.assign(food, {images});
           foodsOfDay[index] = food;
