@@ -32,11 +32,11 @@ class CreateCompte extends React.Component {
           this.props.navigation.navigate('Drawer');
         } else {
           this.setState({loading: false});
-          Alert.alert("Erreur lors de l'inscription. Veuillez réessayer");
+          Alert.alert('Error during registration. Try Again');
         }
       } catch (error) {
         this.setState({loading: false});
-        Alert.alert("Erreur lors de l'inscription. Veuillez réessayer");
+        Alert.alert('Error during registration. Try Again');
       }
     });
   };

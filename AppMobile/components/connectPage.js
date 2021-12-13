@@ -47,7 +47,7 @@ class Connect extends React.Component {
         })
         .catch(err => {
           this.setState({loading: false}, () => {
-            Alert.alert('identifiants incorrect');
+            Alert.alert('incorrect credentials');
           });
         });
     });

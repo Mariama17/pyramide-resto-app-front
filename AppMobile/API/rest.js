@@ -1,17 +1,7 @@
 const apiURL = 'http://yvandev.fr:1998';
 
 const rest = {
-  // login (data) {
-  // 	let myHeaders = new Headers();
-  // 	myHeaders.append('Content-Type', 'application/json');
-  //     let requestOptions = {
-  // 		method: 'POST',
-  // 		headers: myHeaders,
-  // 		body: JSON.stringify(data)
-  //     };
-  //     return fetch(apiURL + '/login', requestOptions);
-  // },
-
+    
   login(data) {
     let myHeaders = new Headers();
     myHeaders.append('Content-Type', 'application/json');
