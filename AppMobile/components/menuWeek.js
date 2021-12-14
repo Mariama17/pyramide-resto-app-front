@@ -2,12 +2,12 @@ import * as React from 'react';
 import {
   Image,
   View,
-  SafeAreaView,
   StyleSheet,
   FlatList,
   Button,
   RefreshControl
 } from 'react-native';
+import { ActivityIndicator } from 'react-native-paper';
 import Modal from 'react-native-modal';
 import Plat from './Plat.js';
 import rest from '../API/rest.js';
@@ -20,7 +20,7 @@ class MenuWeek extends React.Component {
       foodsOfDay: null,
       token: null,
       user: null,
-      refreshing: true,
+      refreshing: false,
     };
   }
 
@@ -47,10 +47,8 @@ class MenuWeek extends React.Component {
   };
 
   getFoodOfCurrentWeek = () => {
-    if (this.props.route.params != undefined)
-      this.setState({token: this.props.route.params.token});
     try {
-      this.setState({foodsOfDay: null}, async () => {
+      this.setState({foodsOfDay: null, refreshing: true}, async () => {
         foodsOfDay = await rest.getFoodOfCurrentWeek();
         foodsOfDay.forEach(async (food, index) => {
           if (
@@ -103,7 +101,7 @@ class MenuWeek extends React.Component {
           <View style={styles.modalView}>
             <View
               style={{
-                backgroud: '#4c3737',
+                background: '#4c3737',
                 width: 140,
                 right: 10,
                 height: 38,
@@ -119,7 +117,7 @@ class MenuWeek extends React.Component {
             </View>
             <View
               style={{
-                backgroud: '#4c3737',
+                background: '#4c3737',
                 width: 140,
                 left: 180,
                 height: 38,
@@ -141,8 +139,21 @@ class MenuWeek extends React.Component {
 
   render() {
     return (
-      <SafeAreaView
-        style={{flex: 1, alignItems: 'center', backgroundColor: '#f7e0d2'}}>
+      <View
+        style={{
+          flex: 1,
+          justifyContent: 'center',
+          alignItems: 'center',
+          backgroundColor: '#f7e0d2',
+        } }>
+        { this.state.refreshing &&
+          <ActivityIndicator
+            size="large"
+            animating={this.state.refreshing}
+            color="#5f4a4a"
+            style={{marginTop: 30}}
+          />
+        }
         {this.handleModal()}
         <FlatList
           data={this.state.foodsOfDay}
@@ -157,23 +168,17 @@ class MenuWeek extends React.Component {
           )}
           refreshControl={
             <RefreshControl
-              refreshing={this.state.refreshing}
+              refreshing={false}
               onRefresh={this.getFoodOfCurrentWeek}
             />
           }
         />
-      </SafeAreaView>
+      </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  // image: {
-  //   top: 10,
-  //   height: 100,
-  //   width: 100,
-  //   left: 170,
-  // },
   centeredView: {
     flex: 1,
     justifyContent: 'flex-end',
@@ -182,7 +187,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   modalView: {
-    // margin: 20,
     borderBottomWidth: 2,
     height: '54%',
     width: '97%',

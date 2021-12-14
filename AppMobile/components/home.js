@@ -9,7 +9,7 @@ import {
   RefreshControl,
   Text,
 } from 'react-native';
-import {Snackbar} from 'react-native-paper';
+import {Snackbar, ActivityIndicator} from 'react-native-paper';
 import Modal from 'react-native-modal';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Plat from './Plat.js';
@@ -25,7 +25,7 @@ class Home extends React.Component {
       showModal: false,
       foodsOfDay: null,
       token: null,
-      refreshing: true,
+      refreshing: false,
       snackbarVisible: false,
       platCommand: undefined,
       user: null,
@@ -56,7 +56,7 @@ class Home extends React.Component {
 
   getFoodOfCurrentDay = () => {
     try {
-      this.setState({foodsOfDay: null}, async () => {
+      this.setState({foodsOfDay: null, refreshing: true}, async () => {
         foodsOfDay = await rest.getFoodOfCurrentDay();
         foodsOfDay.forEach(async (food, index) => {
           images = await rest.getImagesFood(food.id);
@@ -183,8 +183,21 @@ class Home extends React.Component {
   render() {
     return (
       <SafeAreaView
-        style={{flex: 1, alignItems: 'center', backgroundColor: '#f7e0d2'}}>
+        style={{
+          flex: 1,
+          justifyContent: 'center',
+          alignItems: 'center',
+          backgroundColor: '#f7e0d2',
+        }}>
         {this.handleModal()}
+        {this.state.refreshing && (
+          <ActivityIndicator
+            size="large"
+            animating={this.state.refreshing}
+            color="#5f4a4a"
+            style={{marginTop: 30}}
+          />
+        )}
         <Snackbar
           style={{backgroundColor: '#f7e0d2'}}
           visible={this.state.snackbarVisible}
@@ -204,7 +217,7 @@ class Home extends React.Component {
             <Text style={{color: 'black', marginRight: 15}}>
               Your order is on its way
             </Text>
-            <FontAwesomeIcon icon={faClock} size={20} color='#5f4a4a'/>
+            <FontAwesomeIcon icon={faClock} size={20} color="#5f4a4a" />
           </View>
         </Snackbar>
         <FlatList
@@ -221,7 +234,7 @@ class Home extends React.Component {
           )}
           refreshControl={
             <RefreshControl
-              refreshing={this.state.refreshing}
+              refreshing={false}
               onRefresh={this.getFoodOfCurrentDay}
             />
           }

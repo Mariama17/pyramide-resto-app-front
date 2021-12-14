@@ -1,7 +1,7 @@
-const apiURL = 'http://yvandev.fr:1998';
+const apiURL = 'https://yvandev.fr/leroyal';
 
 const rest = {
-    
+
   login(data) {
     let myHeaders = new Headers();
     myHeaders.append('Content-Type', 'application/json');

@@ -13,7 +13,6 @@ class TabNavigator extends React.Component {
 
   render() {
     const Tab = createBottomTabNavigator();
-    // console.log('token tab nav : ', this.props.route.params);
     return (
       <Tab.Navigator
         screenOptions={({route}) => ({
