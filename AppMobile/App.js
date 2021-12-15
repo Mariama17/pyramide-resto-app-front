@@ -26,7 +26,6 @@ class App extends React.Component {
         <View style={{flex: 1}}>
           {/* <SplashScreen/> */}
           <Navigator />
-          {/* <Account/> */}
         </View>
       </NavigationContainer>
     );
