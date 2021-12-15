@@ -67,7 +67,7 @@ class Connect extends React.Component {
             activeUnderlineColor="#f7e0d2"
             activeOutlineColor="#f7e0d2"
             onChangeText={text => this.setState({email: text})}
-            placeholder="Login"
+            placeholder="Email"
           />
           <TextInput
             type="outlined"
