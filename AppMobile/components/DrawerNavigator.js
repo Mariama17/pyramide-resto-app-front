@@ -41,18 +41,18 @@ class Drawer extends React.Component {
           <Drawer.Screen name="My account" component={Account} />
         )}
         <Drawer.Screen name="About" component={About} />
-        <Drawer.Screen name="Schedule" component={Principal} />
+        <Drawer.Screen name="Schedules" component={Principal} />
         {this.state.token != null && this.state.user != null ? (
           <Drawer.Screen
-            name={this.state.user.firstName + ' - Déconnexion'}
+            name={'connexion'}
             component={Connect}
-            options={{headerShown: false}}
+            options={{title: this.state.user.firstName + ' - Déconnexion', headerShown: false}}
           />
         ) : (
           <Drawer.Screen
             name="Connect"
             component={Connect}
-            options={{headerShown: false}}
+            options={{title: 'Connexion'}}
           />
         )}
       </Drawer.Navigator>

@@ -19,7 +19,7 @@ function Header ({ props, name }) {
         style={{
           marginLeft: 30,
           fontSize: 20,
-          // fontWeight: 'bold',
+          fontWeight: 'bold',
           color: 'black',
         }}>
         {name}

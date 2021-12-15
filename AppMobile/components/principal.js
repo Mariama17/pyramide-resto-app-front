@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#f7e0d2',
         margin: 38,
-        width:'80%',
+        width:'90%',
         height: '40%',
         borderWidth: 0.1,
         justifyContent: 'space-between',

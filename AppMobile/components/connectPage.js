@@ -82,24 +82,24 @@ class Connect extends React.Component {
             keyboardType="default"
           />
           <PasswordStrengthMeterBar password={this.state.password} />
-          <View style={styles.bottomScreen}>
-            <Button
-              style={styles.btn}
-              mode="contained"
-              onPress={this.login}
-              loading={this.state.loading}
-              color="#5f4a4a">
-              Sign in
-            </Button>
-            <Text style={styles.forgotPassword}>Forgot your password ?</Text>
-            <Button
-              style={styles.btn}
-              mode="contained"
-              onPress={() => this.props.navigation.navigate('Inscription')}
-              color="#5f4a4a">
-              Sign up
-            </Button>
-          </View>
+        </View>
+        <View style={styles.bottomScreen}>
+          <Button
+            style={styles.btn}
+            mode="contained"
+            onPress={this.login}
+            loading={this.state.loading}
+            color="#5f4a4a">
+            Sign in
+          </Button>
+          <Text style={styles.forgotPassword}>Forgot your password ?</Text>
+          <Button
+            style={styles.btn}
+            mode="contained"
+            onPress={() => this.props.navigation.navigate('Inscription')}
+            color="#5f4a4a">
+            Sign up
+          </Button>
         </View>
       </SafeAreaView>
     );
@@ -108,6 +108,7 @@ class Connect extends React.Component {
 
 const styles = StyleSheet.create({
   image: {
+    flex: 1,
     height: 225,
     width: 220,
   },
@@ -115,30 +116,25 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#513a45',
     alignItems: 'center',
+    justifyContent: 'center',
   },
   input: {
     flex: 1,
-    marginTop: 10,
-    width: 250,
-    // justifyContent: 'space-around',
+    width: '70%',
+    justifyContent: 'space-around',
   },
   forgotPassword: {
     color: '#f7e0d2',
     fontWeight: 'bold',
     textDecorationLine: 'underline',
     fontSize: 15,
-    top: -40
   },
   btn: {
-    // fontWeight: 'bold',
     height: 40,
-    width: 180,
-    top: -30
   },
   bottomScreen: {
     flex: 1,
     alignItems: 'center',
-    marginTop: 30,
     justifyContent: 'space-around',
   },
 });
